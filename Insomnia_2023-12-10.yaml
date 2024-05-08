@@ -1,0 +1,1245 @@
+_type: export
+__export_format: 4
+__export_date: 2023-12-10T12:00:23.810Z
+__export_source: insomnia.desktop.app:v2023.5.8
+resources:
+  - _id: req_39172a35ee3943e69f6995a8b33ecc79
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153982147
+    created: 1702153829971
+    url: "{{ _.base_url }}/portal/payments/{{ _.item_id }}"
+    name: Update One
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "payment_reference": "string",
+          "external_payment_reference": "string",
+          "payment_method": "string",
+          "amount_excl": 0,
+          "amount_incl": 0,
+          "currency": "string",
+          "payment_date": "string",
+          "payment_status": "string",
+          "portal_end_customer_id": 0
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        disabled: false
+        value: application/json
+    authentication: {}
+    metaSortKey: -1702153829971
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_8c630e5b590c49ed805b081994534d65
+    parentId: null
+    modified: 1702153660780
+    created: 1702153660780
+    name: STEM DEV API 0.1.0-alpha
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_235d6b32d2974763b49bd9c9e6467809
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829969
+    created: 1702153829969
+    url: "{{ _.base_url }}/portal/payments/{{ _.item_id }}"
+    name: Get One
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829969
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d31f236282124ee88a0d4d3bb64a04f6
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829967
+    created: 1702153829967
+    url: "{{ _.base_url }}/portal/products/{{ _.item_id }}"
+    name: Get One
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829967
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_400747ee40f847f3ab51f8e80396bc9d
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829964
+    created: 1702153829964
+    url: "{{ _.base_url }}/portal/products"
+    name: Get All
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: skip
+        disabled: true
+        value: "0"
+      - name: limit
+        disabled: true
+        value: "0"
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829964
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0a8b5d2fe41842b393f4143509201b5c
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829961
+    created: 1702153829961
+    url: "{{ _.base_url }}/portal/test-notify"
+    name: Notify Payment
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829961
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3fd5d84a7fa544869949828d4fccf37a
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829958
+    created: 1702153829958
+    url: "{{ _.base_url }}/portal/test-redirect"
+    name: Test Redirect
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829958
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_74eda84b9603477bbc224e452529d44a
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829955
+    created: 1702153829955
+    url: "{{ _.base_url }}/portal/subscriptions"
+    name: Get Subscriptions
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: offset
+        disabled: true
+        value: "0"
+      - name: limit
+        disabled: true
+        value: "0"
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829955
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0109e003859748eb9ac52e68e40b1e6a
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829952
+    created: 1702153829952
+    url: "{{ _.base_url }}/portal/subscriptions/{{ _.portal_end_customer_id }}"
+    name: Get Subscriptions Portal End Customer Id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829952
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8b8a7a2b2d5948189e3cd3269fec20db
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829949
+    created: 1702153829949
+    url: "{{ _.base_url }}/portal/subscriptions/create"
+    name: Create Subscription
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "date_start": "string",
+          "preferred_payment_method": "string",
+          "auto_renew": true,
+          "product_id": 0,
+          "portal_end_customer_id": 0
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        disabled: false
+        value: application/json
+    authentication: {}
+    metaSortKey: -1702153829949
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8280faf96bb640969950d174b80a7f03
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829946
+    created: 1702153829946
+    url: "{{ _.base_url }}/portal/user/{{ _.portal_end_customer_id }}"
+    name: Get Portal End Customer By Id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829946
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_68928baa3b7b472b9200389886fa3f22
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829943
+    created: 1702153829943
+    url: "{{ _.base_url }}/portal/user/login"
+    name: Login User
+    description: ""
+    method: POST
+    body:
+      mimeType: application/x-www-form-urlencoded
+    parameters: []
+    headers:
+      - name: Content-Type
+        disabled: false
+        value: application/x-www-form-urlencoded
+    authentication: {}
+    metaSortKey: -1702153829943
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b9702ece255a4cd1aecb25a3b32d1e83
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829939
+    created: 1702153829939
+    url: "{{ _.base_url }}/portal/user/confirmation"
+    name: Confirm User
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "portal_end_customer_id": 0,
+          "confirmation_mobile_number": "string",
+          "confirmation_pin": "string"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        disabled: false
+        value: application/json
+    authentication: {}
+    metaSortKey: -1702153829939
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_92fe775c81fa44789b4ac9a4d98d33ea
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829936
+    created: 1702153829936
+    url: "{{ _.base_url }}/portal/user/upload-file"
+    name: Upload File
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829936
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1aa4a29a269a4ebdb9319ef24eab9e6e
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153829931
+    created: 1702153829931
+    url: "{{ _.base_url }}/portal/user/resend-confirmation/{{
+      _.portal_end_customer_id }}"
+    name: Resend Confirmation
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1702153829931
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c3e88aa59f914600954de13f5414f635
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702208484306
+    created: 1702153829927
+    url: "{{ _.base_url }}/portal/user/register"
+    name: Register User
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: '{"role":"VAR
+        2","first_name":"green","last_name":"goblin","identification_reference":"123456789","identification_type":"South
+        African
+        ID","passportNumber":"","complex_building":"weed","unit_number":"21","street_address":"214
+        reaading","province":"gauteng","postal_code":"2109","postal_address":"2108
+        green
+        street,\njohannesburg","email":"mosecoza@gmail.com","landLine":"0117144431","mobile_number":"0727308412","alternate_contact_number":"0727308433"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        disabled: false
+        value: application/json
+    authentication: {}
+    metaSortKey: -1702153829927
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_003d5d0721770e3b9f9fe33e87c525da1b682005
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153995769
+    created: 1702153663534
+    name: Base Environment
+    data:
+      base_url: "{{ _.scheme }}://{{ _.base_path }}{{ _.host }}"
+      scheme: https
+      base_path: stm-dev.
+      host: intentio.co.za/api
+    dataPropertyOrder:
+      "&":
+        - base_url
+        - scheme
+        - base_path
+        - host
+    color: null
+    isPrivate: false
+    metaSortKey: 1702153663534
+    _type: environment
+  - _id: jar_003d5d0721770e3b9f9fe33e87c525da1b682005
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153663538
+    created: 1702153663538
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_6f64b4f0fc414273a32d2c5c74ec2097
+    parentId: wrk_8c630e5b590c49ed805b081994534d65
+    modified: 1702153826113
+    created: 1702153660783
+    fileName: STEM DEV API 0.1.0-alpha
+    contents: >
+      {
+        "openapi": "3.0.2",
+        "info": { "title": "STEM DEV API", "version": "0.1.0-alpha" },
+        "servers": [{ "url": "/api" }],
+        "paths": {
+          "/portal/user/register": {
+            "post": {
+              "tags": ["portal", "portal"],
+              "summary": "Register User",
+              "operationId": "register_user_portal_user_register_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/PortalEndCustomerCreate"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/user/resend-confirmation/{portal_end_customer_id}": {
+            "get": {
+              "tags": ["portal", "portal"],
+              "summary": "Resend Confirmation",
+              "operationId": "resend_confirmation_portal_user_resend_confirmation__portal_end_customer_id__get",
+              "parameters": [
+                {
+                  "required": true,
+                  "schema": { "title": "Portal End Customer Id", "type": "integer" },
+                  "name": "portal_end_customer_id",
+                  "in": "path"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/user/upload-file": {
+            "post": {
+              "tags": ["portal", "portal"],
+              "summary": "Upload File",
+              "operationId": "upload_file_portal_user_upload_file_post",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                }
+              }
+            }
+          },
+          "/portal/user/confirmation": {
+            "post": {
+              "tags": ["portal", "portal"],
+              "summary": "Confirm User",
+              "operationId": "confirm_user_portal_user_confirmation_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/PortalConfirmationCreate"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/user/login": {
+            "post": {
+              "tags": ["portal", "portal"],
+              "summary": "Login User",
+              "operationId": "login_user_portal_user_login_post",
+              "requestBody": {
+                "content": {
+                  "application/x-www-form-urlencoded": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Body_login_user_portal_user_login_post"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/user/{portal_end_customer_id}": {
+            "get": {
+              "tags": ["portal", "portal"],
+              "summary": "Get Portal End Customer By Id",
+              "operationId": "get_portal_end_customer_by_id_portal_user__portal_end_customer_id__get",
+              "parameters": [
+                {
+                  "required": true,
+                  "schema": { "title": "Portal End Customer Id", "type": "integer" },
+                  "name": "portal_end_customer_id",
+                  "in": "path"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/subscriptions/create": {
+            "post": {
+              "tags": ["portal", "portal"],
+              "summary": "Create Subscription",
+              "operationId": "create_subscription_portal_subscriptions_create_post",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/PortalSubscriptionsCreate"
+                    }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/subscriptions/{portal_end_customer_id}": {
+            "get": {
+              "tags": ["portal", "portal"],
+              "summary": "Get Subscriptions Portal End Customer Id",
+              "operationId": "get_subscriptions_portal_end_customer_id_portal_subscriptions__portal_end_customer_id__get",
+              "parameters": [
+                {
+                  "required": true,
+                  "schema": { "title": "Portal End Customer Id", "type": "integer" },
+                  "name": "portal_end_customer_id",
+                  "in": "path"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/subscriptions": {
+            "get": {
+              "tags": ["portal", "portal"],
+              "summary": "Get Subscriptions",
+              "operationId": "get_subscriptions_portal_subscriptions_get",
+              "parameters": [
+                {
+                  "required": false,
+                  "schema": { "title": "Offset", "type": "integer", "default": 0 },
+                  "name": "offset",
+                  "in": "query"
+                },
+                {
+                  "required": false,
+                  "schema": { "title": "Limit", "type": "integer", "default": 0 },
+                  "name": "limit",
+                  "in": "query"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SubscriptionResponse"
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/test-redirect": {
+            "get": {
+              "tags": ["portal", "portal"],
+              "summary": "Test Redirect",
+              "operationId": "test_redirect_portal_test_redirect_get",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                }
+              }
+            }
+          },
+          "/portal/test-notify": {
+            "post": {
+              "tags": ["portal", "portal"],
+              "summary": "Notify Payment",
+              "operationId": "notify_payment_portal_test_notify_post",
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": { "application/json": { "schema": {} } }
+                }
+              }
+            }
+          },
+          "/portal/products": {
+            "get": {
+              "tags": ["portal", "Products"],
+              "summary": "Get All",
+              "operationId": "route_portal_products_get",
+              "parameters": [
+                {
+                  "required": false,
+                  "schema": { "title": "Skip", "type": "integer", "default": 0 },
+                  "name": "skip",
+                  "in": "query"
+                },
+                {
+                  "required": false,
+                  "schema": { "title": "Limit", "type": "integer" },
+                  "name": "limit",
+                  "in": "query"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "title": "Response Route Portal Products Get",
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/PortalProducts" }
+                      }
+                    }
+                  }
+                },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/portal/products/{item_id}": {
+            "get": {
+              "tags": ["portal", "Products"],
+              "summary": "Get One",
+              "operationId": "route_portal_products__item_id__get",
+              "parameters": [
+                {
+                  "required": true,
+                  "schema": { "title": "Item Id", "type": "integer" },
+                  "name": "item_id",
+                  "in": "path"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/PortalProducts" }
+                    }
+                  }
+                },
+                "404": { "description": "Not Found",  },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+        
+          "/portal/payments/{item_id}": {
+            "get": {
+              "tags": ["portal", "Payments"],
+              "summary": "Get One",
+              "operationId": "route_portal_payments__item_id__get",
+              "parameters": [
+                {
+                  "required": true,
+                  "schema": { "title": "Item Id", "type": "integer" },
+                  "name": "item_id",
+                  "in": "path"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/PortalPayments" }
+                    }
+                  }
+                },
+                "404": { "description": "Not Found",  },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            },
+            "put": {
+              "tags": ["portal", "Payments"],
+              "summary": "Update One",
+              "operationId": "route_portal_payments__item_id__put",
+              "parameters": [
+                {
+                  "required": true,
+                  "schema": { "title": "Item Id", "type": "integer" },
+                  "name": "item_id",
+                  "in": "path"
+                }
+              ],
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": { "$ref": "#/components/schemas/PortalPaymentsUpdate" }
+                  }
+                },
+                "required": true
+              },
+              "responses": {
+                "200": {
+                  "description": "Successful Response",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/PortalPayments" }
+                    }
+                  }
+                },
+                "404": { "description": "Not Found", },
+                "422": {
+                  "description": "Validation Error",
+                  "content": {
+                    "application/json": {
+                      "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "components": {
+          "schemas": {
+            "Body_login_user_portal_user_login_post": {
+              "title": "Body_login_user_portal_user_login_post",
+              "required": ["username", "password"],
+              "type": "object",
+              "properties": {
+                "grant_type": {
+                  "title": "Grant Type",
+                  "pattern": "password",
+                  "type": "string"
+                },
+                "username": { "title": "Username", "type": "string" },
+                "password": { "title": "Password", "type": "string" },
+                "scope": { "title": "Scope", "type": "string", "default": "" },
+                "client_id": { "title": "Client Id", "type": "string" },
+                "client_secret": { "title": "Client Secret", "type": "string" }
+              }
+            },
+            "HTTPValidationError": {
+              "title": "HTTPValidationError",
+              "type": "object",
+              "properties": {
+                "detail": {
+                  "title": "Detail",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ValidationError" }
+                }
+              }
+            },
+            "PortalConfirmationCreate": {
+              "title": "PortalConfirmationCreate",
+              "type": "object",
+              "properties": {
+                "portal_end_customer_id": {
+                  "title": "Portal End Customer Id",
+                  "type": "integer"
+                },
+                "confirmation_mobile_number": {
+                  "title": "Confirmation Mobile Number",
+                  "type": "string"
+                },
+                "confirmation_pin": { "title": "Confirmation Pin", "type": "string" }
+              }
+            },
+            "PortalEndCustomerCreate": {
+              "title": "PortalEndCustomerCreate",
+              "required": [
+                "first_name",
+                "last_name",
+                "identification_reference",
+                "identification_type",
+                "mobile_number",
+                "email"
+              ],
+              "type": "object",
+              "properties": {
+                "first_name": { "title": "First Name", "type": "string" },
+                "last_name": { "title": "Last Name", "type": "string" },
+                "identification_reference": {
+                  "title": "Identification Reference",
+                  "type": "string"
+                },
+                "identification_type": {
+                  "title": "Identification Type",
+                  "type": "string"
+                },
+                "mobile_number": { "title": "Mobile Number", "type": "string" },
+                "email": { "title": "Email", "type": "string" },
+                "password": { "title": "Password", "type": "string" },
+                "alternate_contact_number": {
+                  "title": "Alternate Contact Number",
+                  "type": "string",
+                  "default": ""
+                },
+                "complex_building": {
+                  "title": "Complex Building",
+                  "type": "string",
+                  "default": ""
+                },
+                "unit_number": {
+                  "title": "Unit Number",
+                  "type": "string",
+                  "default": ""
+                },
+                "street_address": {
+                  "title": "Street Address",
+                  "type": "string",
+                  "default": ""
+                },
+                "postal_address": {
+                  "title": "Postal Address",
+                  "type": "string",
+                  "default": ""
+                },
+                "suburb": { "title": "Suburb", "type": "string", "default": "" },
+                "city": { "title": "City", "type": "string", "default": "" },
+                "province": { "title": "Province", "type": "string", "default": "" },
+                "postal_code": {
+                  "title": "Postal Code",
+                  "type": "string",
+                  "default": ""
+                }
+              }
+            },
+            "PortalPayments": {
+              "title": "PortalPayments",
+              "required": [
+                "payment_reference",
+                "amount_incl",
+                "payment_date",
+                "payment_status",
+                "portal_end_customer_id",
+                "id"
+              ],
+              "type": "object",
+              "properties": {
+                "payment_reference": {
+                  "title": "Payment Reference",
+                  "type": "string"
+                },
+                "external_payment_reference": {
+                  "title": "External Payment Reference",
+                  "type": "string"
+                },
+                "payment_method": { "title": "Payment Method", "type": "string" },
+                "amount_excl": { "title": "Amount Excl", "type": "number" },
+                "amount_incl": { "title": "Amount Incl", "type": "number" },
+                "currency": { "title": "Currency", "type": "string" },
+                "payment_date": {
+                  "title": "Payment Date",
+                  "type": "string",
+                  "format": "date"
+                },
+                "payment_status": { "title": "Payment Status", "type": "string" },
+                "portal_end_customer_id": {
+                  "title": "Portal End Customer Id",
+                  "type": "integer"
+                },
+                "id": { "title": "Id", "type": "integer" }
+              }
+            },
+            "PortalPaymentsUpdate": {
+              "title": "PortalPaymentsUpdate",
+              "required": [
+                "payment_reference",
+                "external_payment_reference",
+                "payment_method",
+                "amount_excl",
+                "amount_incl",
+                "currency",
+                "payment_date",
+                "payment_status",
+                "portal_end_customer_id"
+              ],
+              "type": "object",
+              "properties": {
+                "payment_reference": {
+                  "title": "Payment Reference",
+                  "type": "string"
+                },
+                "external_payment_reference": {
+                  "title": "External Payment Reference",
+                  "type": "string"
+                },
+                "payment_method": { "title": "Payment Method", "type": "string" },
+                "amount_excl": { "title": "Amount Excl", "type": "number" },
+                "amount_incl": { "title": "Amount Incl", "type": "number" },
+                "currency": { "title": "Currency", "type": "string" },
+                "payment_date": {
+                  "title": "Payment Date",
+                  "type": "string",
+                  "format": "date"
+                },
+                "payment_status": { "title": "Payment Status", "type": "string" },
+                "portal_end_customer_id": {
+                  "title": "Portal End Customer Id",
+                  "type": "integer"
+                }
+              }
+            },
+            "PortalProducts": {
+              "title": "PortalProducts",
+              "required": [
+                "product_type",
+                "name",
+                "description",
+                "currency",
+                "renewal_type"
+              ],
+              "type": "object",
+              "properties": {
+                "product_type": { "title": "Product Type", "type": "string" },
+                "name": { "title": "Name", "type": "string" },
+                "description": { "title": "Description", "type": "string" },
+                "recurring_price_excl": {
+                  "title": "Recurring Price Excl",
+                  "type": "number"
+                },
+                "recurring_price_incl": {
+                  "title": "Recurring Price Incl",
+                  "type": "number"
+                },
+                "recurring_description": {
+                  "title": "Recurring Description",
+                  "type": "string"
+                },
+                "speed_down_mbps": { "title": "Speed Down Mbps", "type": "integer" },
+                "speed_up_mbps": { "title": "Speed Up Mbps", "type": "integer" },
+                "currency": { "title": "Currency", "type": "string" },
+                "onceoff_price_excl": {
+                  "title": "Onceoff Price Excl",
+                  "type": "number"
+                },
+                "onceoff_price_incl": {
+                  "title": "Onceoff Price Incl",
+                  "type": "number"
+                },
+                "onceoff_description": {
+                  "title": "Onceoff Description",
+                  "type": "string"
+                },
+                "renewal_type": { "title": "Renewal Type", "type": "string" },
+                "duration_days": { "title": "Duration Days", "type": "integer" },
+                "availabl_on_portal": {
+                  "title": "Availabl On Portal",
+                  "type": "boolean"
+                },
+                "id": { "title": "Id", "type": "integer" }
+              }
+            },
+            "PortalSubscriptions": {
+              "title": "PortalSubscriptions",
+              "required": [
+                "date_start",
+                "auto_renew",
+                "product_id",
+                "portal_end_customer_id",
+                "id",
+                "subscription_reference",
+                "account_status"
+              ],
+              "type": "object",
+              "properties": {
+                "date_start": {
+                  "title": "Date Start",
+                  "type": "string",
+                  "format": "date"
+                },
+                "preferred_payment_method": {
+                  "title": "Preferred Payment Method",
+                  "type": "string",
+                  "default": ""
+                },
+                "auto_renew": { "title": "Auto Renew", "type": "boolean" },
+                "product_id": { "title": "Product Id", "type": "integer" },
+                "portal_end_customer_id": {
+                  "title": "Portal End Customer Id",
+                  "type": "integer"
+                },
+                "id": { "title": "Id", "type": "integer" },
+                "next_billing_date": {
+                  "title": "Next Billing Date",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "subscription_reference": {
+                  "title": "Subscription Reference",
+                  "type": "string"
+                },
+                "account_status": { "title": "Account Status", "type": "string" },
+                "products": { "$ref": "#/components/schemas/PortalProducts" }
+              }
+            },
+            "PortalSubscriptionsCreate": {
+              "title": "PortalSubscriptionsCreate",
+              "required": [
+                "date_start",
+                "auto_renew",
+                "product_id",
+                "portal_end_customer_id"
+              ],
+              "type": "object",
+              "properties": {
+                "date_start": {
+                  "title": "Date Start",
+                  "type": "string",
+                  "format": "date"
+                },
+                "preferred_payment_method": {
+                  "title": "Preferred Payment Method",
+                  "type": "string",
+                  "default": ""
+                },
+                "auto_renew": { "title": "Auto Renew", "type": "boolean" },
+                "product_id": { "title": "Product Id", "type": "integer" },
+                "portal_end_customer_id": {
+                  "title": "Portal End Customer Id",
+                  "type": "integer"
+                }
+              }
+            },
+            "PortalSubscriptionsUpdate": {
+              "title": "PortalSubscriptionsUpdate",
+              "type": "object",
+              "properties": {
+                "payment_method": {
+                  "title": "Payment Method",
+                  "type": "string",
+                  "default": ""
+                },
+                "auto_renew": { "title": "Auto Renew", "type": "boolean" },
+                "product_id": { "title": "Product Id", "type": "integer" },
+                "subscription_status": {
+                  "title": "Subscription Status",
+                  "type": "string"
+                },
+                "payment_status": { "title": "Payment Status", "type": "string" }
+              }
+            },
+            "SubscriptionResponse": {
+              "title": "SubscriptionResponse",
+              "required": ["count", "offset", "limit", "results"],
+              "type": "object",
+              "properties": {
+                "count": { "title": "Count", "type": "integer" },
+                "offset": { "title": "Offset", "type": "integer" },
+                "limit": { "title": "Limit", "type": "integer" },
+                "results": {
+                  "title": "Results",
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/PortalSubscriptions" }
+                }
+              }
+            },
+            "ValidationError": {
+              "title": "ValidationError",
+              "required": ["loc", "msg", "type"],
+              "type": "object",
+              "properties": {
+                "loc": {
+                  "title": "Location",
+                  "type": "array",
+                  "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] }
+                },
+                "msg": { "title": "Message", "type": "string" },
+                "type": { "title": "Error Type", "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    contentType: yaml
+    _type: api_spec
+  - _id: env_04224ca96f2f45dbb2ad9f4bb426ac6e
+    parentId: env_003d5d0721770e3b9f9fe33e87c525da1b682005
+    modified: 1702153829921
+    created: 1702153829921
+    name: OpenAPI env null
+    data:
+      scheme:
+        - http
+      base_path: /api
+      host: ""
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1702153829921
+    _type: environment

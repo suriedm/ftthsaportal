@@ -1,0 +1,1 @@
+export const url = "https://stm-dev.intentio.co.za/api/portal";
