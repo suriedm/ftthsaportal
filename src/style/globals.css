@@ -265,8 +265,8 @@ p {
   width: 100%;
   max-width: 270px;
   overflow: hidden;
-  left: -100%;
-  top: 30;
+  left: -4%;
+  top: 60;
 }
 
 
@@ -347,11 +347,11 @@ p {
 
 .wrapper .menu-btn {
   
-  top: 23px;
+  top: 10px;
   background: #222155;
   color: #fff;
-  height: 45px;
-  width: 45px;
+  height: 36px;
+  width: 36px;
   z-index: 9999;
   border: 1px solid #263547;
   border-radius: 5px;
@@ -408,8 +408,8 @@ p {
     /* height: 100%; */
     width: 270px;
     overflow: hidden;
-    left: -805px;
-    top: 30px;
+    left: -4%;
+    top: 60px;
     /* transition: all 0.3s ease; */
 }
 
@@ -469,7 +469,7 @@ p {
   font-size: 18px;
   font-weight: 500;
   display: block;
-  padding: 10px; /* Adjust padding for better spacing */
+  padding: 5px; /* Adjust padding for better spacing */
   box-sizing: border-box; /* Ensure padding doesn't affect element's total size */
   width: 100%;
 }
@@ -1074,14 +1074,13 @@ button:hover {
 
 .menu-btn {
     cursor: pointer;
-    
-    left: 190px; 
+    left: 210px; 
 }
 
 #sidebar {
     position: absolute;
-    top: 30px;
-    left: 15%;
+    top: 60px;
+    left: 4%;
     background-color: #222155;
     width: 100%;
     padding: 10px;
@@ -2492,7 +2491,7 @@ footer .logo {
     width: 246px;
     overflow: hidden;
     /* left: -815px; */
-    top: 30px;
+    top: 60px;
     color: white;
     /* transition: all 0.3s ease; */
 }
@@ -3922,7 +3921,7 @@ svg {
 }
 .modal-dialog1 {
   position: absolute;
-  top: 50%; 
+  top: 300%; 
   left: 50%;
   width: 60%;
   transform: translate(-50%, -50%);

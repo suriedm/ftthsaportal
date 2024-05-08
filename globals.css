@@ -206,18 +206,18 @@ p {
     .wrapper .menu-btn {
         /* right: auto; */
          right:1665px; 
-        top:201px;
+        top:10px;
         position: absolute;
     }
 }
 @media screen and (min-width: 1092px) {
 .wrapper .menu-btn {
     
-    top: -40px;
+    top: 10px;
     background: #222155;
     color: #fff;
-    height: 45px;
-    width: 45px;
+    height: 36px;
+    width: 36px;
     z-index: 9999;
     border: 1px solid #263547;
     border-radius: 5px;

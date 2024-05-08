@@ -16,6 +16,7 @@ import {
 import image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import { url } from "@/utils/constants";
+import { Header } from "@/components/Header";
 
 export interface handleActivation {
   detail: string;
@@ -358,203 +359,14 @@ const UserProfile: NextPage = () => {
   };
 
   function logout() {
-    localStorage.removeItem("accessToken");
+    // localStorage.removeItem("accessToken");
     window.location.href = "/";
   }
 
   return (
     <main>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-      ></meta>
-      <nav>
-        <div className="logo">
-          <link rel="icon" href="/favicon.ico" />
-          <Link href="/">
-            {" "}
-            <Image
-              src={LOGO}
-              alt="Logo"
-              className="logo"
-              width={150}
-              height={160}
-            />
-          </Link>
-        </div>
-        {/* <FontAwesomeIcon icon={faUser} onClick={toggleModal}style={{fontSize:'25px', paddingLeft:'35%',color:'#222155'}} /> */}
-        <input type="checkbox" id="menu-toggle" />
-        {/* <label htmlFor="menu-toggle" className="menu-icon">&#9776;</label> */}
-        <nav id="sidebar">
-          <ul className="list-items">
-            <li>
-              {" "}
-              <Link href="/">
-                <i className="fas fa-home"></i> Home
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/service">
-                <i className="fas fa-sliders-h"></i> About us
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/fibreplane">
-                <i className="fas fa-address-book"></i> Fibre Plans
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link me-4 dropdown-toggle link-dark"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-expanded="false"
-              >
-                My Account
-              </Link>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link href="/managesubscription" className="dropdown-item">
-                    Manage Subscription
-                  </Link>
-                </li>
-                <li>
-                  <Link href="blog.html" className="dropdown-item">
-                    Cancel Fibre Account
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <Link href="/profile"> My Profile</Link>
-            </li>
-
-            <li>
-              <Link href="#">
-                <i className="fas fa-globe-asia"></i>Re-charge
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Cancel & Upgrade
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Speed Test
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Track Order
-              </Link>
-            </li>
-            <li>
-              <Link href="" onClick={logout}>
-                <i className="fas fa-envelope"></i>Sign Out
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </nav>
-      {/* </header> */}
-
-      {/* <link rel="icon" href="/favicon.ico" /> */}
-      {/* <div className="navbar1"> */}
-      {/* <Image src={LOGO} alt="Logo" className="logo" width={150} height={150} />     */}
-      {/* <p style={{ color: '#131D72', fontSize: '15px', fontWeight: 'bold',paddingLeft:'-25%' }}> */}
-      {/* </p>    */}
-      {/* <FontAwesomeIcon icon={faUser} onClick={toggleModal}style={{fontSize:'25px', paddingLeft:'35%',color:'#222155'}} /> */}
-      <div className="wrapper" style={{ top: "-2%" }}>
-        <input type="checkbox" id="btn" hidden />
-        <label className="menu-btn" htmlFor="btn">
-          <div>
-            <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
-          </div>
-        </label>
-        <nav id="sidebar">
-          <ul className="list-items">
-            {/* <Link href="/"> <Image src={LOGO} alt="Logo" className="logo" width={120} height={110} />  </Link>   */}
-            <li>
-              {" "}
-              <Link href="">
-                <i className="fas fa-home"></i> Home
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/service">
-                <i className="fas fa-sliders-h"></i> About us
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/fibreplane">
-                <i className="fas fa-address-book"></i> Fibre Plans
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link me-4 dropdown-toggle link-dark"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-expanded="false"
-              >
-                My Account
-              </Link>
-              <ul className="dropd-menu">
-                <li>
-                  <Link href="/managesubscription" className="dropdown-item">
-                    Manage Subscription
-                  </Link>
-                </li>
-                <li>
-                  <Link href="blog.html" className="dropdown-item">
-                    Cancel Fibre Account
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <Link href="/profile"> My Profile</Link>
-            </li>
-
-            <li>
-              <Link href="#">
-                <i className="fas fa-globe-asia"></i>Re-charge
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Cancel & Upgrade
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Speed Test
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Track Order
-              </Link>
-            </li>
-            <li>
-              <Link href="" onClick={logout}>
-                <i className="fas fa-envelope"></i>Sign Out
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <br />
-      <br />
+      <Header />
+      
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css"
@@ -563,8 +375,6 @@ const UserProfile: NextPage = () => {
         src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"
         async
       />
-      <br />
-      <br />
       <div className="group2">
         <div className="group">
           {/* <h2 style={{paddingLeft:'380px',color:'#E2520F'}}></h2> */}

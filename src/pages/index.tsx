@@ -17,7 +17,6 @@ import { FaFacebook } from "react-icons/fa";
 import { FormEvent, SetStateAction, useEffect, useState } from "react";
 import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FaUserEdit } from "react-icons/fa";
-import LOGO from "../components/images/LOGO.jpg";
 import BannerImage from "../components/images/FTTH_SA-Banner-Image-1.png";
 import map from "../components/images/ITWWW-Fibre-Coverage-Map.jpg";
 import paygate from "../components/images/PayGate-Card-Brand-Logos-PayGate.png";
@@ -29,6 +28,7 @@ import { useParams } from "next/navigation";
 import { url } from "@/utils/constants";
 import { useSearchParams } from "next/navigation";
 import { subscriptionStore } from "@/stores/Subscription";
+import { Header } from "@/components/Header";
 
 interface PostObject {
   message: string;
@@ -58,15 +58,10 @@ const App: NextPage = () => {
   const { userId, setUserId } = authStore();
   const { setDeviceReference } = subscriptionStore();
   const searchParams = useSearchParams();
-  const [showModal, setShowModal] = useState(false);
   const { push } = useRouter();
   const [address, setAddress] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [formValues, setFormValues] = useState<PostObject>({
@@ -152,52 +147,10 @@ const App: NextPage = () => {
   }, []);
   */ 
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-  const handleLoginIconClick = () => {
-    setShowModal(true);
-  };
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    console.log(formData);
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+ 
 
-  async function login() {
-    console.log(formData);
 
-    const response = await fetch(
-      "https://stm-dev.intentio.co.za/api/portal/user/login",
-      {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          ...formData,
-          grant_type: "",
-          scope: "",
-          client_id: "",
-          client_secret: "",
-        }),
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("accessToken", data.access_token);
-      // localStorage.setItem("deviceReference",data.devicereference);
-      // setDeviceReference(data.device_reference);
-      setUserId(data.portal_end_customer_id);
-      alert("Successfully logged in as: " + formData.username);
-      router.push("./profile?username=" + formData.username);
-    } else {
-      alert("Incorrect password or username. Please try again.");
-    }
-  }
+ 
   // function logout() {
   //     localStorage.removeItem("accessToken");
   //     localStorage.removeItem("deviceReference");
@@ -211,39 +164,9 @@ const App: NextPage = () => {
       setUserId(foundUser);
     }
   }, []);
-  async function forgotpassword() {
-    const url = "device_reference";
-    const formData = {
-      username: "",
-      mobile_number: "",
-    };
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
 
-      if (!response.ok) {
-        console.warn("Invalid credentials. Please try again.");
-      }
 
-      // window.location.href = "./profile";
-    } catch (error) {
-      console.error("Login error:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  const handleInputChange = (event: { target: { name: any; value: any } }) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
+ 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
@@ -254,198 +177,7 @@ const App: NextPage = () => {
   }
   return (
     <main>
-      <header className="header">
-        <nav>
-          <div className="logo">
-            <link rel="icon" href="/favicon.ico" />
-            <Link href="/">
-              {" "}
-              <Image
-                src={LOGO}
-                alt="Logo"
-                className="logo"
-                width={120}
-                height={110}
-              />{" "}
-            </Link>
-          </div>
-          <FontAwesomeIcon
-            icon={faUser}
-            onClick={toggleModal}
-            style={{ fontSize: "25px", paddingLeft: "9%", color: "#222155" }}
-          />
-          <br />
-          <br />
-          {formData.username}
-          <input type="checkbox" id="menu-toggle" />
-
-          {/* <label htmlFor="menu-toggle" className="menu-icon">&#9776;</label> */}
-          <nav id="sidebar">
-            <ul className="list-items">
-              <li>
-                {" "}
-                <Link href="/">
-                  <i className="fas fa-home"></i> Home
-                </Link>
-              </li>
-              <li>
-                {" "}
-                <Link href="/service">
-                  <i className="fas fa-sliders-h"></i> About us
-                </Link>
-              </li>
-              <li>
-                {" "}
-                <Link href="/fibreplane">
-                  <i className="fas fa-address-book"></i> Fibre Plans
-                </Link>
-              </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link me-4 dropdown-toggle link-dark"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-expanded="false"
-                >
-                  My Account
-                </Link>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link href="/managesubscription" className="dropdown-item">
-                      Manage Subscription
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="blog.html" className="dropdown-item">
-                      Cancel Fibre Account
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                {" "}
-                <Link href="/profile"> My Profile</Link>
-              </li>
-
-              <li>
-                <Link href="#">
-                  <i className="fas fa-globe-asia"></i>Re-charge
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
-                  <i className="fas fa-envelope"></i>Cancel & Upgrade
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
-                  <i className="fas fa-envelope"></i>Speed Test
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
-                  <i className="fas fa-envelope"></i>Track Order
-                </Link>
-              </li>
-              <li>
-                <Link href="#" onClick={handleLogout}>
-                  <i className="fas fa-envelope"></i>Sign Out
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </nav>
-      </header>
-      <div className="wrapper">
-        {formData.username}
-        <input type="checkbox" id="btn" hidden />
-        <label className="menu-btn" htmlFor="btn">
-          <div>
-            <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
-          </div>
-        </label>
-        <nav id="sidebar">
-          <ul className="list-items">
-            <li>
-              {" "}
-              <Link href="/">
-                <i className="fas fa-home"></i> Home
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/service">
-                <i className="fas fa-sliders-h"></i> About us
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/fibreplane">
-                <i className="fas fa-address-book"></i> Fibre Plans
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link me-4 dropdown-toggle link-dark"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-expanded="false"
-              >
-                My Account
-              </Link>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link href="/managesubscription" className="dropdown-item">
-                    Manage Subscription
-                  </Link>
-                </li>
-                <li>
-                  <Link href="blog.html" className="dropdown-item">
-                    Cancel Fibre Account
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              {" "}
-              <Link href="/profile"> My Profile</Link>
-            </li>
-
-            <li>
-              <Link href="#">
-                <i className="fas fa-globe-asia"></i>Re-charge
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Cancel & Upgrade
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Speed Test
-              </Link>
-            </li>
-            <li>
-              <Link href="#">
-                <i className="fas fa-envelope"></i>Track Order
-              </Link>
-            </li>
-            <li>
-              <Link href="#" onClick={handleLogout}>
-                <i className="fas fa-envelope"></i>Sign Out
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      {/* </div> */}
-      <br />
-      <br />
-      <br />
-      <br />
+      <Header/>
       <div className="full-width-block ">
         <p>
           <b>Super Fast Affordable Fibre to Your Home Is Here!.</b>
@@ -461,88 +193,7 @@ const App: NextPage = () => {
           height={121}
         />
       </div>
-      {showModal && (
-        <div
-          id="login"
-          className="modal fade"
-          role="dialog"
-          style={{ display: "block" }}
-        >
-          <div className="modal-dialog1">
-            <div className="modal-content1">
-              <div className="modal-body1">
-                <span
-                  onClick={toggleModal}
-                  className="close"
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                    marginRight: "103px",
-                    marginTop: "9px",
-                  }}
-                >
-                  &times;
-                </span>
-                <br />
-                <br />
-                {/* <span onClick={toggleModal} className="close" style={{ marginLeft: '110%',paddingTop:'100%' }}>&times;</span> */}
-                <h2
-                  style={{
-                    marginTop: "-14%",
-                    color: "white",
-                    paddingRight: "3px",
-                    fontSize: "27px",
-                  }}
-                >
-                  Login
-                </h2>
-                <br />
-                <br />
-                <form className="d-flex justify-content-center ">
-                  <input
-                    type="text"
-                    name="username"
-                    className="username form-control"
-                    placeholder="Username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                  />
-                  <br />
-                  <input
-                    type="password"
-                    name="password"
-                    className="password form-control"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                  <br />
-
-                  <input
-                    className="btn login"
-                    type="button"
-                    onClick={login}
-                    value="Login"
-                    style={{ backgroundColor: " #e2520f" }}
-                  />
-                  {error && <p style={{ color: "red" }}>{error}</p>}
-                  <a
-                    href=""
-                    style={{ color: "white", paddingLeft: "29%" }}
-                    onClick={forgotpassword}
-                  >
-                    {" "}
-                    Forgot Password
-                  </a>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      
       {/* <div className="custom-search"> */}
       {/* <button className="custom-search-botton" type="submit" style={{backgroundColor:'#E2520F',color:'white',borderRadius: '100px',width:'150px',height:'42px',marginLeft:'353%', position: 'absolute',top:'2px',fontSize:'15px'}} onClick={handleSearch}><b>Check my coverage</b></button>   */}
       {/* <input type="text" className="custom-search-input" placeholder="Enter your address" value={address}  */}
