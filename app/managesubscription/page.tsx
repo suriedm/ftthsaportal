@@ -1,21 +1,14 @@
-"use isclient";
-import Image from "next/image";
-import Link from "next/link";
-// import '../style/globals.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+"use client"
 import React, { useRef, useState, useEffect } from "react";
-import LOGO from "../components/images/LOGO.jpg";
-import App from "./_app";
-("../pages/app");
-import { authStore } from "@/stores/profile";
-import { TransactionResponse, transactionStore } from "@/stores/Transaction";
+("../../pages/app");
+import { authStore } from "../../src/stores/profile";
+import { TransactionResponse, transactionStore } from "../../src/stores/Transaction";
 // import { SubscriptionResponse, subscriptionStore } from '@/stores/subscription';
-import router, { Router, useRouter } from "next/router";
-import { Profile, ProfileResponse } from "./profile";
-import { subscriptionStore } from "@/stores/Subscription";
-import { hydrateRoot } from "react-dom/client";
-import { Header } from "@/components/Header";
+import { useRouter } from "next/navigation";
+import { Profile, ProfileResponse } from "../profile/page";
+import { subscriptionStore } from "../../src/stores/Subscription";
+import type { NextPage } from "next";
+
 const url = `https://stm-dev.intentio.co.za/api/portal/`;
 
 interface SuccessRequest {
@@ -25,7 +18,7 @@ interface SuccessRequest {
   detail?: string;
 }
 
-const Modal = () => {
+const Modal : NextPage = () => {
   // const { subscriptions, setSubscription } = subscriptionStore()
   const [loading, setLoading] = useState(true);
   const { push } = useRouter();
@@ -84,7 +77,6 @@ const Modal = () => {
   }
   return (
     <main>
-      <Header />
       <section >
         <h1
           style={{
@@ -261,12 +253,6 @@ const Modal = () => {
           </table>
         </div>
       </section>
-
-      {/* <div id="modal-content-wrapper">
-        <div className="modalcontainer">
-         
-        </div>
-      </div> */}
     </main>
   );
 };

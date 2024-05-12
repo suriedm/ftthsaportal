@@ -1,6 +1,6 @@
 import { createStore } from 'zustand/vanilla';
 import { create } from 'zustand';
-import { Profile } from '@/pages/profile';
+import { Profile } from '../../app/profile/page';
 import { persist, createJSONStorage } from 'zustand/middleware'
 type AuthStore = {
     accessToken: string | undefined;

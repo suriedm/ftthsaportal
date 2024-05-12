@@ -1,22 +1,11 @@
+"use client"
 import Image from "next/image";
 import type { NextPage } from "next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import { useRouter } from "next/router";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Style } from "util";
-// '../style/globals.css';
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import LOGO from "../components/images/LOGO.jpg";
-import paygate from "../components/images/PayGate-Card-Brand-Logos-PayGate.png";
-import banner from "../components/images/FTTH_SA-Banner-Image-Free-installation-1.png";
-import Link from "next/link";
-import { Header } from "@/components/Header";
-const Fibreplane = () => {
+
+
+const Fibreplane : NextPage = () => {
   useEffect(() => {
     const fetData = async () => {
       const request = await fetch(`/api/portal`);
@@ -46,7 +35,6 @@ const Fibreplane = () => {
   }
   return (
     <main>
-      <Header />
       <div className="full-width-block ">
         <p>
           <b>Super Fast Affordable Fibre to Your Home Is Here!.</b>
@@ -322,7 +310,7 @@ const Fibreplane = () => {
       <br />
       <br />
       <section className="showcase">
-        <Image width={925} height={151} alt="" src={banner} />
+        <Image width={925} height={151} alt="" src="/images/FTTH_SA-Banner-Image-Free-installation-1.png" />
       </section>
       <br />
       <br />
@@ -334,81 +322,7 @@ const Fibreplane = () => {
       <br />
       <br />
       <br />
-      <footer className="footer">
-        <div className="columns" style={{ paddingLeft: "150px" }}>
-          <b>
-            <h3>PRIVACY POLICY</h3>
-          </b>
-          <p style={{ paddingRight: "86px", color: "#131D72" }}>Policy</p>
-        </div>
-        <div className="columns" style={{ paddingLeft: "150px" }}>
-          <b>
-            <h3>TERMS OF USE</h3>
-          </b>
-          <p style={{ paddingRight: "57px", color: "#131D72" }}>Ts & Cs</p>
-        </div>
-        <div className="columns" style={{ paddingLeft: "150px" }}>
-          <b>
-            <h3>FOLLOW</h3>
-          </b>
-          <Link href="https://www.facebook.com/profile.php?id=100077963720140&mibextid=LQQJ4d">
-            {/* < FontAwesomeIcon icon={faFacebook} style={{ paddingTop: '9px', color:'white',paddingRight:'209%' }}/> */}
-            <FontAwesomeIcon
-              icon={faFacebook}
-              size="2x"
-              style={{ paddingTop: "12px", color: "#131D72" }}
-            />
-          </Link>
-          <Link href="#">
-            <FontAwesomeIcon
-              icon={faLinkedin}
-              size="2x"
-              style={{
-                paddingTop: "12px",
-                color: "#131D72",
-                display: " flex",
-                gap: "10px",
-              }}
-            />
-          </Link>
-          <Link href="https://instagram.com/ftthsa?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">
-            <FontAwesomeIcon
-              icon={faInstagram}
-              size="2x"
-              style={{ paddingTop: "12px", color: "#131D72" }}
-            />
-          </Link>
-        </div>
-        <div className="columns" style={{ paddingLeft: "150px" }}>
-          <b>
-            <h3>CONTACT US</h3>
-          </b>
-          <b>
-            <h6 style={{ paddingRight: "62px", color: "#131D72" }}>Sales</h6>
-          </b>
-          <p style={{ color: "#131D72" }}>sales@ftthsa.co.za</p>
-          <br />
-          <b>
-            <h6 style={{ paddingRight: "47px", color: "#131D72" }}>Support</h6>
-          </b>
-          <p style={{ color: "#131D72" }}>support@gplat.co.za</p>
-          <br />
-          <b>
-            <h6 style={{ paddingRight: "25px", color: "#131D72" }}>
-              Call Center
-            </h6>
-          </b>
-          <p style={{ paddingRight: "11px", color: "#131D72" }}>0861 777 889</p>
-        </div>
-        <br />
-        {/* <div className="copyRightArea"> */}
-        <div className="container">
-          <div className="row1">
-            <br />
-            <br />
-          </div>
-        </div>
-      </footer>
+      
     </main>
   );
 };

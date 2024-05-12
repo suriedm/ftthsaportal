@@ -1,11 +1,12 @@
+"use client";
 import { faBars, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import LOGO from "./images/LOGO.jpg";
-import { authStore } from "@/stores/profile";
-import { useRouter } from "next/router";
+import { authStore } from "../stores/profile";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const router = useRouter();
@@ -179,27 +180,28 @@ export const Header = () => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          padding: "16px 8px",
-          width: "auto"
+          padding: "8px 16px",
+          width: "auto",
         }}
       >
         <Link className="logo" href="/">
           <Image
-            src={LOGO}
+            src="/images/LOGO.jpg"
             alt="Logo"
             className="logo"
             width={120}
             height={110}
           />{" "}
         </Link>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", minWidth:"48px" }}>
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              marginRight: "2px",
+              flexDirection: "row",
+              marginRight: "4px",
             }}
           >
+            {profile ? <h6>{profile.first_name}</h6> : null}
             <FontAwesomeIcon
               icon={userId ? faUser : faLock}
               onClick={() => (userId ? null : toggleModal())}
@@ -207,12 +209,8 @@ export const Header = () => {
             />
           </div>
           <div className="wrapper">
-            {/* {formData.username} */}
-            <input type="checkbox" id="btn" hidden />
             <label className="menu-btn" htmlFor="btn">
-              <div>
-                <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
-              </div>
+              <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
             </label>
             <nav id="sidebar">
               <ul className="list-items">

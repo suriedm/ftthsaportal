@@ -1,30 +1,20 @@
+"use client";
 import Image from "next/image";
 import type { NextPage } from "next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import { useRouter } from "next/router";
-// import '../style/page.module.css';
-import Link from "next/link";
-import LOGO from "../components/images/LOGO.jpg";
-import checkers from "../components/images/Checkers-01.png";
-import checker2 from "../components/images/Checkers-02.png";
-import house from "../components/images/House-and-Home-Logo.png";
-import shoprite from "../components/images/Shoprite-04.png";
-import office from "../components/images/Post-Office-07.png";
-import ShopriteU from "../components/images/Shoprite-U-Save-05.png";
-import Ok from "../components/images/Ok-06.png";
+import { useRouter } from "next/navigation";
+
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { before } from "node:test";
-import { authStore } from "@/stores/profile";
-import "../pages/otpconfirmation";
+import { authStore } from "../../src/stores/profile";
 import React from "react";
-import { transactionStore } from "@/stores/Transaction";
-import { Header } from "@/components/Header";
+import { transactionStore } from "../../src/stores/Transaction";
+import { Header } from "../../src/components/Header";
 export interface RegistrationResponse {
   success: boolean;
   message: string;
@@ -63,7 +53,7 @@ interface PostObject {
   //  ricaTwo: File | null;
 }
 
-const Fiftymegabytes: NextPage = () => {
+const TenMegabytes: NextPage = () => {
   const { userId, setUserId } = authStore();
   const [showOTP, setShowOTP] = useState(false);
   const [registrationResponse, setRegistrationResponse] =
@@ -103,7 +93,7 @@ const Fiftymegabytes: NextPage = () => {
     setFormValues((current) => ({ ...current, [id]: value }));
   };
   useEffect(() => {
-    console.log(" [fifty-megabytes.tsx:53]", formValues);
+    console.log(" [ten-megabytes.tsx:53]", formValues);
   }, [formValues]);
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { files, id } = e.target;
@@ -344,6 +334,7 @@ const Fiftymegabytes: NextPage = () => {
       alert("OTP Confirmed successfully");
       setShowOTP(false);
       router.push("/otpconfirmation");
+      // window.location.href = "./otpconfirmation";
       clearTimeout(otpTimer);
     } catch (error) {
       console.error("Error confirming OTP:", error);
@@ -377,6 +368,10 @@ const Fiftymegabytes: NextPage = () => {
       console.error("Error confirming OTP:", error);
     }
   }
+  function logout() {
+    localStorage.removeItem("accessToken");
+    window.location.href = "/";
+  }
 
   const [isClient, setIsClient] = useState(false);
 
@@ -400,15 +395,10 @@ const Fiftymegabytes: NextPage = () => {
 
   return (
     <main>
-      <Header />
-
       <section
         className="form-container"
-        onSubmit={(event) => event.preventDefault()}
       >
-        <br />
-        <br />
-        <br />
+       
         <h1
           style={{
             color: "#E2520F",
@@ -419,7 +409,7 @@ const Fiftymegabytes: NextPage = () => {
             textAlign: "center",
           }}
         >
-          50MBPS PAYMENT PLAN<span className="text-red-500"></span>
+          10MBPS PAYMENT PLAN<span className="text-red-500"></span>
         </h1>
         <br />
         <div className="group2">
@@ -435,7 +425,7 @@ const Fiftymegabytes: NextPage = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                <b> 50MBPS PAYMENT PLAN</b>
+                <b> 10MBPS PAYMENT PLAN</b>
                 <span className="text-red-500"></span>
               </h1>
               <br />
@@ -1237,7 +1227,7 @@ const Fiftymegabytes: NextPage = () => {
                   style={{ color: "#263547", fontFamily: "sans-serif" }}
                   htmlFor="zuname"
                 >
-                  <b>R 999</b>
+                  <b>R 350</b>
                 </label>
               </div>
             </div>
@@ -1256,7 +1246,7 @@ const Fiftymegabytes: NextPage = () => {
                   style={{ color: "#263547", fontFamily: "sans-serif" }}
                   htmlFor="zuname"
                 >
-                  <b>R 1898 pm</b>
+                  <b>R 749 pm</b>
                 </label>
               </div>
             </div>
@@ -1327,7 +1317,7 @@ const Fiftymegabytes: NextPage = () => {
             <p>
               <Image
                 className=""
-                src={checkers}
+                src="/images/Checkers-01.png"
                 alt=""
                 width={89}
                 height={13}
@@ -1335,17 +1325,23 @@ const Fiftymegabytes: NextPage = () => {
               />{" "}
               <Image
                 className=""
-                src={checker2}
+                src="/images/Checkers-02.png"
                 alt=""
                 width={89}
                 height={13}
                 style={{ marginRight: "9px" }}
               />{" "}
-              <Image className="" src={house} alt="" width={116} height={12} />{" "}
+              <Image
+                className=""
+                src="/images/House-and-Home-Logo.png"
+                alt=""
+                width={116}
+                height={12}
+              />{" "}
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={shoprite}
+                src="/images/Shoprite-04.png"
                 alt=""
                 width={95}
                 height={13}
@@ -1353,7 +1349,7 @@ const Fiftymegabytes: NextPage = () => {
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={office}
+                src="/images/Post-Office-07.png"
                 alt=""
                 width={104}
                 height={23}
@@ -1361,7 +1357,7 @@ const Fiftymegabytes: NextPage = () => {
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={ShopriteU}
+                src="/images/Shoprite-U-Save-05.png"
                 alt=""
                 width={53}
                 height={20}
@@ -1369,7 +1365,7 @@ const Fiftymegabytes: NextPage = () => {
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={Ok}
+                src="/images/Ok-06.png"
                 alt=""
                 width={38}
                 height={31}
@@ -1551,4 +1547,4 @@ const Fiftymegabytes: NextPage = () => {
   );
 };
 
-export default Fiftymegabytes;
+export default TenMegabytes;

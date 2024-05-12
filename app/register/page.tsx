@@ -1,6 +1,8 @@
+"use client"
+import type { NextPage } from "next";
 import Link from "next/link";
 import { SetStateAction, useEffect, useState } from "react";
-const Login = () => {
+const Login : NextPage = () => {
   function PasswordChecklist() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
@@ -35,7 +37,7 @@ const Login = () => {
     }
   }
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
+    <main className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden">
       <div className="w-full p-6 bg-white rounded-md shadow-md lg:max-w-xl">
         <h1 className="text-3xl font-bold text-center text-gray-700">Logo</h1>
         <form className="mt-6">
@@ -85,7 +87,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
-    </div>
+    </main>
   );
 };
 export default Login;

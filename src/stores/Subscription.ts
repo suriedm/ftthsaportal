@@ -1,7 +1,7 @@
 import { createStore } from 'zustand/vanilla';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { Profile } from '@/pages/profile';
+import { Profile } from '../../app/profile/page';
 import { persist, createJSONStorage } from 'zustand/middleware'
 export interface SubscriptionsResponse {
   success: boolean

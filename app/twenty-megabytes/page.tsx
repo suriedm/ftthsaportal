@@ -1,30 +1,10 @@
+"use client";
 import Image from "next/image";
 import type { NextPage } from "next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import { useRouter } from "next/router";
-// import '../style/page.module.css';
-import Link from "next/link";
-import LOGO from "../components/images/LOGO.jpg";
-import checkers from "../components/images/Checkers-01.png";
-import checker2 from "../components/images/Checkers-02.png";
-import house from "../components/images/House-and-Home-Logo.png";
-import shoprite from "../components/images/Shoprite-04.png";
-import office from "../components/images/Post-Office-07.png";
-import ShopriteU from "../components/images/Shoprite-U-Save-05.png";
-import Ok from "../components/images/Ok-06.png";
+import { useRouter } from "next/navigation";
 import { SetStateAction, useEffect, useRef, useState } from "react";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { before } from "node:test";
-import { authStore } from "@/stores/profile";
-import "../pages/otpconfirmation";
-import React from "react";
-import { transactionStore } from "@/stores/Transaction";
-import { Header } from "@/components/Header";
+import { authStore } from "../../src/stores/profile";
+import { Header } from "../../src/components/Header";
 export interface RegistrationResponse {
   success: boolean;
   message: string;
@@ -56,15 +36,14 @@ interface PostObject {
   mobile_number: string;
   alternate_contact_number: string;
   password: string;
-  city: string;
-  application_type: string;
+  suburbs: string;
   preferred_payment_method: string;
   // ricaOne: File | null;
   //  ricaTwo: File | null;
 }
 
-const TenMegabytes: NextPage = () => {
-  const { userId, setUserId } = authStore();
+const Twentymegabytes: NextPage = () => {
+  const { setUserId } = authStore();
   const [showOTP, setShowOTP] = useState(false);
   const [registrationResponse, setRegistrationResponse] =
     useState<RegistrationResponse>();
@@ -87,8 +66,7 @@ const TenMegabytes: NextPage = () => {
     alternate_contact_number: "",
     password: "",
     message: "",
-    city: "",
-    application_type: "",
+    suburbs: "",
     preferred_payment_method: "",
     //  ricaOne: null,
     //  ricaTwo: ull,
@@ -210,14 +188,57 @@ const TenMegabytes: NextPage = () => {
     let otpExpiryTime = new Date().getTime() + 15 * 60 * 1000;
     return { otp, otpExpiryTime };
   }
-  function verif(otp: string, otpExpiryTime: number) {
+  function verifyOTP(otp: string, otpExpiryTime: number) {
     if (new Date().getTime() <= otpExpiryTime) {
       return otp === confirmation_pin;
     }
     return false;
   }
+  const creditcardSubmit = async (event: { target: any }) => {
+    const checkbox = event.target;
+    console.log(`Credit Card checkbox checked: ${checkbox.checked}`);
+    if (checkbox.checked) {
+      const url =
+        "https://stm-dev.intentio.co.za/api/portal/subscriptions/create";
+      const data = {
+        date_start: new Date().toISOString().split("T")[0],
+        preferred_payment_method: "creditcard",
+        auto_renew: true,
+        application_type: "",
+        portal_product_id: 1,
+        portal_end_customer_id: 327,
+      };
 
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            date_start: data.date_start,
+            portal_end_customer_id: data.portal_end_customer_id,
+            preferred_payment_method: data.preferred_payment_method,
+            auto_renew: data.auto_renew,
+            application_type: data.application_type,
+            portal_product_id: data.portal_product_id,
+          }),
+        });
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Subscription successful");
+          // router.push("https://stm-dev.intentio.co.za//portal/redirect?gateway=payfast&payment_id=18");
+          // return "https://stm-dev.intentio.co.za//portal/redirect?gateway=payfast&payment_id";
+        } else {
+          console.error("Error in subscription:", response.statusText);
+        }
+      } catch (error) {
+        // console.error('Error in subscription:', error.message);
+      }
+    }
+  };
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
@@ -260,8 +281,6 @@ const TenMegabytes: NextPage = () => {
     }
   };
 
-  const [refreshing, setRefreshing] = React.useState(false);
-
   const submitSalesCallRequest = async () => {
     try {
       const salesCallResponse = await fetch(
@@ -272,33 +291,13 @@ const TenMegabytes: NextPage = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            application_type: "salesagent",
-            portal_end_customer_id: registrationResponse?.data.id,
-            first_name: formValues.first_name,
-            last_name: formValues.last_name,
-            identification_reference: formValues.identification_reference,
-            identification_type: formValues.identification_type,
-            mobile_number: formValues.mobile_number,
-            email: formValues.email,
-            password: formValues.password,
-            street_address: formValues.street_address,
-            role: formValues.role,
-            passportNumber: formValues.passportNumber,
-            complex_building: formValues.complex_building,
-            unit_number: formValues.unit_number,
-            province: formValues.province,
-            postal_code: formValues.postal_code,
-            postal_address: formValues.postal_address,
-            landLine: formValues.landLine,
-            city: formValues.city,
-            preferred_payment_method: formValues.preferred_payment_method,
+            ...formValues,
+            message: "Sales call request: " + formValues.message,
           }),
         }
       );
       if (!salesCallResponse.ok) {
-        console.log(
-          "Your information is successfully submitted to a Sales agent call "
-        );
+        throw new Error("Sales call request failed");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -344,7 +343,6 @@ const TenMegabytes: NextPage = () => {
       alert("OTP Confirmed successfully");
       setShowOTP(false);
       router.push("/otpconfirmation");
-      // window.location.href = "./otpconfirmation";
       clearTimeout(otpTimer);
     } catch (error) {
       console.error("Error confirming OTP:", error);
@@ -378,11 +376,12 @@ const TenMegabytes: NextPage = () => {
       console.error("Error confirming OTP:", error);
     }
   }
-  function logout() {
-    localStorage.removeItem("accessToken");
-    window.location.href = "/";
-  }
 
+  const complex_building = [
+    "Main Street",
+    "First Avenue",
+    " Andy Bostonian Hotel 29 Abel Rd, Berea",
+  ];
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -390,9 +389,9 @@ const TenMegabytes: NextPage = () => {
   }, []);
   // const PopupModal = ({ onClose }) => {
   const router = useRouter();
+  // const [showOTP, setShowOTP] = useState(false);
 
   const onhandleSubmit = () => {
-    window.location.reload();
     setShowOTP(true);
   };
   const [value, setValue] = useState("");
@@ -403,29 +402,57 @@ const TenMegabytes: NextPage = () => {
     setValue(event.target.value);
   };
 
+  const cashpayment = async () => {
+    try {
+      const response = await fetch(
+        "https://stm-dev.intentio.co.za/api/portal/subscriptions/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            date_start: new Date().toISOString().split("T")[0],
+            subscription_initialisation_type: "onceoff",
+            preferred_payment_method: "cash/Scode",
+            billing_auto_renew: true,
+            application_type: "manual",
+            device_reference: "",
+            portal_product_id: 1,
+            portal_end_customer_id: "0",
+          }),
+        }
+      );
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Subscription created successfully:", result);
+        // showAlert(749);
+        window.location.href =
+          "https://stm-dev.intentio.co.za//portal/redirect?gateway=payfast&payment_id=";
+      } else {
+        console.error("Subscription creation failed");
+      }
+    } catch (error) {
+      console.error("Error creating subscription:", error);
+    }
+  };
+
   return (
     <main>
-      <Header />
-      <section
-        className="form-container"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <br />
-        <br />
-        <br />
+      <section className="form-container">
         <h1
           style={{
             color: "#E2520F",
-            fontWeight: "bold",
+            fontWeight: "600",
             fontSize: "29px",
             paddingTop: "0",
             position: "relative",
             textAlign: "center",
+            fontFamily: "sans-serif",
           }}
         >
-          10MBPS PAYMENT PLAN<span className="text-red-500"></span>
+          20MBPS FIBRE PLAN<span className="text-red-500"></span>
         </h1>
-        <br />
         <div className="group2">
           <div className="group">
             <form id="register" onSubmit={handleSubmit}>
@@ -439,7 +466,7 @@ const TenMegabytes: NextPage = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                <b> 10MBPS PAYMENT PLAN</b>
+                <b> 20MBPS PAYMENT PLAN</b>
                 <span className="text-red-500"></span>
               </h1>
               <br />
@@ -718,10 +745,10 @@ const TenMegabytes: NextPage = () => {
                   {/* onChange={handleFormValues} */}
                   {/* style={{ width: '96%',padding:'8px', }}  /></div> */}
                   <select
-                    id="city"
-                    name="city"
+                    id="suburbs"
+                    name="suburbs"
                     onChange={handleFormValues}
-                    value={formValues.city}
+                    value={formValues.suburbs}
                     style={{
                       width: "96%",
                       padding: "8px",
@@ -789,6 +816,7 @@ const TenMegabytes: NextPage = () => {
                   </div>
                 </div>
               </div>
+              <br />
               <div className="zeile">
                 <div className="input-container">
                   <label
@@ -1241,7 +1269,7 @@ const TenMegabytes: NextPage = () => {
                   style={{ color: "#263547", fontFamily: "sans-serif" }}
                   htmlFor="zuname"
                 >
-                  <b>R 350</b>
+                  <b>R 599</b>
                 </label>
               </div>
             </div>
@@ -1260,7 +1288,7 @@ const TenMegabytes: NextPage = () => {
                   style={{ color: "#263547", fontFamily: "sans-serif" }}
                   htmlFor="zuname"
                 >
-                  <b>R 749 pm</b>
+                  <b>R 898 pm</b>
                 </label>
               </div>
             </div>
@@ -1331,7 +1359,7 @@ const TenMegabytes: NextPage = () => {
             <p>
               <Image
                 className=""
-                src={checkers}
+                src="/images/Checkers-01.png"
                 alt=""
                 width={89}
                 height={13}
@@ -1339,17 +1367,23 @@ const TenMegabytes: NextPage = () => {
               />{" "}
               <Image
                 className=""
-                src={checker2}
+                src="/images/Checkers-02.png"
                 alt=""
                 width={89}
                 height={13}
                 style={{ marginRight: "9px" }}
               />{" "}
-              <Image className="" src={house} alt="" width={116} height={12} />{" "}
+              <Image
+                className=""
+                src="/images/House-and-Home-Logo.png"
+                alt=""
+                width={116}
+                height={12}
+              />{" "}
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={shoprite}
+                src="/images/Shoprite-04.png"
                 alt=""
                 width={95}
                 height={13}
@@ -1357,7 +1391,7 @@ const TenMegabytes: NextPage = () => {
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={office}
+                src="/images/Post-Office-07.png"
                 alt=""
                 width={104}
                 height={23}
@@ -1365,7 +1399,7 @@ const TenMegabytes: NextPage = () => {
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={ShopriteU}
+                src="/images/Shoprite-U-Save-05.png"
                 alt=""
                 width={53}
                 height={20}
@@ -1373,7 +1407,7 @@ const TenMegabytes: NextPage = () => {
               <Image
                 className=""
                 style={{ marginRight: "10px" }}
-                src={Ok}
+                src="/images/Ok-06.png"
                 alt=""
                 width={38}
                 height={31}
@@ -1457,6 +1491,7 @@ const TenMegabytes: NextPage = () => {
                   {/* OTP verification form */}
                   <form
                     id="otp-form"
+                    onSubmit={confirmOTP}
                     style={{
                       display: "flex",
                       justifyContent: "center",
@@ -1473,8 +1508,8 @@ const TenMegabytes: NextPage = () => {
                         aria-label={`OTP digit ${index + 1}`}
                         className="otp-input"
                         style={{
-                          width: `${80 / otp.length}%`,
-                          margin: "0.2%",
+                          width: `${100 / otp.length}%`,
+                          margin: "0.5%",
                           padding: "1%",
                           borderRadius: "3px",
                           boxSizing: "border-box",
@@ -1493,7 +1528,7 @@ const TenMegabytes: NextPage = () => {
                     <div style={{ display: "flex", justifyContent: "center" }}>
                       {/* Verify OTP button */}
                       <button
-                        type="button"
+                        type="submit"
                         onClick={confirmOTP}
                         style={{
                           backgroundColor: "#E2520F",
@@ -1555,4 +1590,4 @@ const TenMegabytes: NextPage = () => {
   );
 };
 
-export default TenMegabytes;
+export default Twentymegabytes;

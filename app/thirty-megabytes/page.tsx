@@ -1,30 +1,14 @@
+"use client";
 import Image from "next/image";
 import type { NextPage } from "next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
-import { useRouter } from "next/router";
-// import '../style/page.module.css';
-import Link from "next/link";
-import LOGO from "../components/images/LOGO.jpg";
-import checkers from "../components/images/Checkers-01.png";
-import checker2 from "../components/images/Checkers-02.png";
-import house from "../components/images/House-and-Home-Logo.png";
-import shoprite from "../components/images/Shoprite-04.png";
-import office from "../components/images/Post-Office-07.png";
-import ShopriteU from "../components/images/Shoprite-U-Save-05.png";
-import Ok from "../components/images/Ok-06.png";
+import { useRouter } from "next/navigation";
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { before } from "node:test";
-import { authStore } from "@/stores/profile";
-import "../pages/otpconfirmation";
+import { authStore } from "../../src/stores/profile";
 import React from "react";
-import { transactionStore } from "@/stores/Transaction";
-import { Header } from "@/components/Header";
+import { transactionStore } from "../../src/stores/Transaction";
+import { Header } from "../../src/components/Header";
 export interface RegistrationResponse {
   success: boolean;
   message: string;
@@ -63,7 +47,7 @@ interface PostObject {
   //  ricaTwo: File | null;
 }
 
-const Hundredmegabytes: NextPage = () => {
+const ThirtyMegabytes: NextPage = () => {
   const { userId, setUserId } = authStore();
   const [showOTP, setShowOTP] = useState(false);
   const [registrationResponse, setRegistrationResponse] =
@@ -103,7 +87,7 @@ const Hundredmegabytes: NextPage = () => {
     setFormValues((current) => ({ ...current, [id]: value }));
   };
   useEffect(() => {
-    console.log(" [ Hundredmegabytes.tsx:53]", formValues);
+    console.log(" [thirty-megabytes.tsx:53]", formValues);
   }, [formValues]);
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { files, id } = e.target;
@@ -400,14 +384,10 @@ const Hundredmegabytes: NextPage = () => {
 
   return (
     <main>
-      <Header />
       <section
         className="form-container"
         onSubmit={(event) => event.preventDefault()}
       >
-        <br />
-        <br />
-        <br />
         <h1
           style={{
             color: "#E2520F",
@@ -418,7 +398,7 @@ const Hundredmegabytes: NextPage = () => {
             textAlign: "center",
           }}
         >
-          100MBPS PAYMENT PLAN<span className="text-red-500"></span>
+          30MBPS PAYMENT PLAN<span className="text-red-500"></span>
         </h1>
         <br />
         <div className="group2">
@@ -434,7 +414,7 @@ const Hundredmegabytes: NextPage = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                <b> 100MBPS PAYMENT PLAN</b>
+                <b> 30MBPS PAYMENT PLAN</b>
                 <span className="text-red-500"></span>
               </h1>
               <br />
@@ -1132,422 +1112,449 @@ const Hundredmegabytes: NextPage = () => {
             <br />
             <hr />
             <br />
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  Provider
-                </label>
+            <div className="upload">
+              <h1
+                style={{
+                  paddingLeft: "-37px",
+                  color: "#E2520F",
+                  fontWeight: "bold",
+                  fontSize: "19px",
+                  paddingTop: "-70px",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                <b>ORDER SUMMARY</b>
+                <span className="text-red-500"></span>
+              </h1>
+              <br />
+              <hr />
+              <br />
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    Provider
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>FTTHSA</b>
+                  </label>
+                </div>
               </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>FTTHSA</b>
-                </label>
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    Download Speed
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>10Mpbs</b>
+                  </label>
+                </div>
               </div>
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    Upload Speed
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>10Mpbs</b>
+                  </label>
+                </div>
+              </div>
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    Router
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>Free</b>
+                  </label>
+                </div>
+              </div>
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    Once-Off Activation Fee
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>R 399</b>
+                  </label>
+                </div>
+              </div>
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    Monthly Payment
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>R 899</b>
+                  </label>
+                </div>
+              </div>
+              <hr />
+              <div className="zeile">
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="vorname"
+                  >
+                    <b>Total</b>
+                  </label>
+                </div>
+                <div className="input-container">
+                  <label
+                    style={{ color: "#263547", fontFamily: "sans-serif" }}
+                    htmlFor="zuname"
+                  >
+                    <b>R 1098 pm</b>
+                  </label>
+                </div>
+              </div>
+              <hr />
+              <br />
             </div>
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  Download Speed
-                </label>
-              </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>10Mpbs</b>
-                </label>
-              </div>
-            </div>
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  Upload Speed
-                </label>
-              </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>10Mpbs</b>
-                </label>
-              </div>
-            </div>
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  Router
-                </label>
-              </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>Free</b>
-                </label>
-              </div>
-            </div>
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  Once-Off Activation Fee
-                </label>
-              </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>R 399</b>
-                </label>
-              </div>
-            </div>
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  Monthly Payment
-                </label>
-              </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>R 1199</b>
-                </label>
-              </div>
-            </div>
-            <hr />
-            <div className="zeile">
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="vorname"
-                >
-                  <b>Total</b>
-                </label>
-              </div>
-              <div className="input-container">
-                <label
-                  style={{ color: "#263547", fontFamily: "sans-serif" }}
-                  htmlFor="zuname"
-                >
-                  <b>R 2198 pm</b>
-                </label>
-              </div>
-            </div>
-            <hr />
             <br />
-          </div>
-          <br />
-          <br />
-          <div className="upload">
-            <h1
-              style={{
-                paddingLeft: "-37px",
-                color: "#E2520F",
-                fontWeight: "bold",
-                fontSize: "19px",
-                paddingTop: "-70px",
-                fontFamily: "sans-serif",
-              }}
-            >
-              <b>SELECT PAYMENT METHOD</b>
-              <span className="text-red-500"></span>
-            </h1>
             <br />
-            <hr />
-            <br />
-            <input
-              type="checkbox"
-              id="credit_card"
-              name="creditcard"
-              onChange={onhandle}
-              checked={isChecked3}
-            />
-            <label
-              id=" checkbox3"
-              style={{ color: "#263547", fontFamily: "sans-serif" }}
-            >
-              <b>CREDIT CARD/DEBIT CARD</b>
-            </label>
-            <br />
-            <input
-              type="checkbox"
-              id="VOUCHER"
-              onChange={handleChange}
-              checked={isChecked}
-            />
-            <label
-              id="radioA-label"
-              style={{ color: "#263547", fontFamily: "sans-serif" }}
-            >
-              <b>VOUCHER</b>
-            </label>
-            <br />
-            <input
-              type="checkbox"
-              id="CASH/SCODE"
-              name="CASH/SCODE"
-              onChange={onhandle}
-              checked={isChecked4}
-            />
-            <label
-              id="radioA-label"
-              style={{ color: "#263547", fontFamily: "sans-serif" }}
-            >
-              <b>* CASH/SCODE</b>
-            </label>
-            <br />
-
-            <p>
-              <Image
-                className=""
-                src={checkers}
-                alt=""
-                width={89}
-                height={13}
-                style={{ marginRight: "9px" }}
-              />{" "}
-              <Image
-                className=""
-                src={checker2}
-                alt=""
-                width={89}
-                height={13}
-                style={{ marginRight: "9px" }}
-              />{" "}
-              <Image className="" src={house} alt="" width={116} height={12} />{" "}
-              <Image
-                className=""
-                style={{ marginRight: "10px" }}
-                src={shoprite}
-                alt=""
-                width={95}
-                height={13}
-              />{" "}
-              <Image
-                className=""
-                style={{ marginRight: "10px" }}
-                src={office}
-                alt=""
-                width={104}
-                height={23}
+            <div className="upload">
+              <h1
+                style={{
+                  paddingLeft: "-37px",
+                  color: "#E2520F",
+                  fontWeight: "bold",
+                  fontSize: "19px",
+                  paddingTop: "-70px",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                <b>SELECT PAYMENT METHOD</b>
+                <span className="text-red-500"></span>
+              </h1>
+              <br />
+              <hr />
+              <br />
+              <input
+                type="checkbox"
+                id="credit_card"
+                name="creditcard"
+                onChange={onhandle}
+                checked={isChecked3}
               />
-              <Image
-                className=""
-                style={{ marginRight: "10px" }}
-                src={ShopriteU}
-                alt=""
-                width={53}
-                height={20}
-              />{" "}
-              <Image
-                className=""
-                style={{ marginRight: "10px" }}
-                src={Ok}
-                alt=""
-                width={38}
-                height={31}
+              <label
+                id=" checkbox3"
+                style={{ color: "#263547", fontFamily: "sans-serif" }}
+              >
+                <b>CREDIT CARD/DEBIT CARD</b>
+              </label>
+              <br />
+              <input
+                type="checkbox"
+                id="VOUCHER"
+                onChange={handleChange}
+                checked={isChecked}
               />
-            </p>
-            <p
-              style={{
-                fontSize: "14px",
-                fontFamily: "sans-serif",
-                color: "#263547",
-              }}
-            >
-              * Cash Payments can be made at any of these participating stores.
-              You will have to select CASH as your payment method above. You
-              will receive your SCode Barcode to complete your payment at these
-              stores. Your installation will be pending until we receive your
-              payment.
-            </p>
-          </div>
-          <br />
-          <button
-            id="submitBtn"
-            type="submit"
-            form="register"
-            onClick={handleSubmit}
-            style={{
-              backgroundColor: "#E2520F",
-              margin: "-4px 0 0",
-              padding: "10px",
-              color: "white",
-              borderRadius: "9px",
-              borderColor: "#E2520F",
-            }}
-          >
-            ORDER NOW
-          </button>
+              <label
+                id="radioA-label"
+                style={{ color: "#263547", fontFamily: "sans-serif" }}
+              >
+                <b>VOUCHER</b>
+              </label>
+              <br />
+              <input
+                type="checkbox"
+                id="CASH/SCODE"
+                name="CASH/SCODE"
+                onChange={onhandle}
+                checked={isChecked4}
+              />
+              <label
+                id="radioA-label"
+                style={{ color: "#263547", fontFamily: "sans-serif" }}
+              >
+                <b>* CASH/SCODE</b>
+              </label>
+              <br />
 
-          {showOTP && (
-            <div
-              className="modal-overlay"
+              <p>
+                <Image
+                  className=""
+                  src="/images/Checkers-01.png"
+                  alt=""
+                  width={89}
+                  height={13}
+                  style={{ marginRight: "9px" }}
+                />{" "}
+                <Image
+                  className=""
+                  src="/images/Checkers-02.png"
+                  alt=""
+                  width={89}
+                  height={13}
+                  style={{ marginRight: "9px" }}
+                />{" "}
+                <Image
+                  className=""
+                  src="/images/House-and-Home-Logo.png"
+                  alt=""
+                  width={116}
+                  height={12}
+                />{" "}
+                <Image
+                  className=""
+                  style={{ marginRight: "10px" }}
+                  src="/images/Shoprite-04.png"
+                  alt=""
+                  width={95}
+                  height={13}
+                />{" "}
+                <Image
+                  className=""
+                  style={{ marginRight: "10px" }}
+                  src="/images/Post-Office-07.png"
+                  alt=""
+                  width={104}
+                  height={23}
+                />
+                <Image
+                  className=""
+                  style={{ marginRight: "10px" }}
+                  src="/images/Shoprite-U-Save-05.png"
+                  alt=""
+                  width={53}
+                  height={20}
+                />{" "}
+                <Image
+                  className=""
+                  style={{ marginRight: "10px" }}
+                  src="/images/Ok-06.png"
+                  alt=""
+                  width={38}
+                  height={31}
+                />
+              </p>
+              <p
+                style={{
+                  fontSize: "14px",
+                  fontFamily: "sans-serif",
+                  color: "#263547",
+                }}
+              >
+                * Cash Payments can be made at any of these participating
+                stores. You will have to select CASH as your payment method
+                above. You will receive your SCode Barcode to complete your
+                payment at these stores. Your installation will be pending until
+                we receive your payment.
+              </p>
+            </div>
+            <br />
+            <button
+              id="submitBtn"
+              type="submit"
+              form="register"
+              onClick={handleSubmit}
               style={{
-                backgroundColor: "#11143405",
-                width: "50%",
-                maxWidth: "500px",
-                margin: "13% auto",
-                padding: "2%",
-                borderRadius: "5px",
+                backgroundColor: "#E2520F",
+                margin: "-4px 0 0",
+                padding: "10px",
+                color: "white",
+                borderRadius: "9px",
+                borderColor: "#E2520F",
               }}
             >
-              <div className="modal-content">
-                <section
-                  className="otp"
-                  aria-label="OTP Verification"
-                  style={{
-                    backgroundColor: "rgb(17 20 52 / 6%)",
-                    width: "85%",
-                    maxWidth: "500px",
-                    margin: "13% auto",
-                    padding: "2%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  <h1
+              ORDER NOW
+            </button>
+
+            {showOTP && (
+              <div
+                className="modal-overlay"
+                style={{
+                  backgroundColor: "#11143405",
+                  width: "50%",
+                  maxWidth: "500px",
+                  margin: "13% auto",
+                  padding: "2%",
+                  borderRadius: "5px",
+                }}
+              >
+                <div className="modal-content">
+                  <section
+                    className="otp"
+                    aria-label="OTP Verification"
                     style={{
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: "2rem",
+                      backgroundColor: "rgb(17 20 52 / 6%)",
+                      width: "85%",
+                      maxWidth: "500px",
+                      margin: "13% auto",
+                      padding: "2%",
+                      borderRadius: "5px",
                     }}
                   >
-                    OTP Verification:
-                  </h1>
-                  <p
-                    style={{
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    Please enter your OTP sent to your mobile number
-                  </p>
-                  {/* OTP verification form */}
-                  <form
-                    id="otp-form"
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "row",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {/* Render OTP input fields */}
-                    {otp.map((data, index) => (
-                      <input
-                        key={index}
-                        type="text"
-                        aria-label={`OTP digit ${index + 1}`}
-                        className="otp-input"
-                        style={{
-                          width: `${80 / otp.length}%`,
-                          margin: "0.2%",
-                          padding: "1%",
-                          borderRadius: "3px",
-                          boxSizing: "border-box",
-                          textAlign: "center",
-                          fontSize: "1.5rem",
-                        }}
-                        onChange={(event) => handleOtpChange(index, event)}
-                        value={data}
-                        maxLength={1}
-                      />
-                    ))}
-                    {/* Display OTP verification message */}
-                    <h2 style={{ textAlign: "center", color: "#fff" }}>
-                      {message}
-                    </h2>
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                      {/* Verify OTP button */}
-                      <button
-                        type="button"
-                        onClick={confirmOTP}
-                        style={{
-                          backgroundColor: "#E2520F",
-                          color: "#fff",
-                          border: "none",
-                          borderRadius: "5px",
-                          padding: "10px 22px",
-                          margin: "15px 10px",
-                          cursor: "pointer",
-                          fontSize: "1rem",
-                        }}
+                    <h1
+                      style={{
+                        color: "white",
+                        textAlign: "center",
+                        fontSize: "2rem",
+                      }}
+                    >
+                      OTP Verification:
+                    </h1>
+                    <p
+                      style={{
+                        color: "white",
+                        textAlign: "center",
+                        fontSize: "1.2rem",
+                      }}
+                    >
+                      Please enter your OTP sent to your mobile number
+                    </p>
+                    {/* OTP verification form */}
+                    <form
+                      id="otp-form"
+                      onSubmit={confirmOTP}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {/* Render OTP input fields */}
+                      {otp.map((data, index) => (
+                        <input
+                          key={index}
+                          type="text"
+                          aria-label={`OTP digit ${index + 1}`}
+                          className="otp-input"
+                          style={{
+                            width: `${100 / otp.length}%`,
+                            margin: "0.5%",
+                            padding: "1%",
+                            borderRadius: "3px",
+                            boxSizing: "border-box",
+                            textAlign: "center",
+                            fontSize: "1.5rem",
+                          }}
+                          onChange={(event) => handleOtpChange(index, event)}
+                          value={data}
+                          maxLength={1}
+                        />
+                      ))}
+                      {/* Display OTP verification message */}
+                      <h2 style={{ textAlign: "center", color: "#fff" }}>
+                        {message}
+                      </h2>
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
                       >
-                        <b>VERIFY OTP</b>
-                      </button>
-                      {/* Resend OTP button */}
-                      <button
-                        type="button"
-                        onClick={resendOTP}
-                        style={{
-                          backgroundColor: "#E2520F",
-                          color: "#fff",
-                          border: "none",
-                          borderRadius: "5px",
-                          padding: "10px 22px",
-                          margin: "15px 10px",
-                          cursor: "pointer",
-                          fontSize: "1rem",
-                        }}
-                      >
-                        <b>RESEND OTP</b>
-                      </button>
-                    </div>
-                  </form>
-                </section>
+                        {/* Verify OTP button */}
+                        <button
+                          type="submit"
+                          onClick={confirmOTP}
+                          style={{
+                            backgroundColor: "#E2520F",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                            padding: "10px 22px",
+                            margin: "15px 10px",
+                            cursor: "pointer",
+                            fontSize: "1rem",
+                          }}
+                        >
+                          <b>VERIFY OTP</b>
+                        </button>
+                        {/* Resend OTP button */}
+                        <button
+                          type="button"
+                          onClick={resendOTP}
+                          style={{
+                            backgroundColor: "#E2520F",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                            padding: "10px 22px",
+                            margin: "15px 10px",
+                            cursor: "pointer",
+                            fontSize: "1rem",
+                          }}
+                        >
+                          <b>RESEND OTP</b>
+                        </button>
+                      </div>
+                    </form>
+                  </section>
+                </div>
               </div>
-            </div>
-          )}
-          <button
-            id="submitBtn"
-            name="REQUEST SALES CALL"
-            type="submit"
-            form="register"
-            onClick={submitSalesCallRequest}
-            style={{
-              backgroundColor: "#E2520F",
-              margin: "-4px 0 0",
-              padding: "10px",
-              color: "white",
-              borderRadius: "9px",
-              borderColor: "#E2520F",
-              marginLeft: "56px",
-            }}
-          >
-            REQUEST SALES CALL
-          </button>
+            )}
+            <button
+              id="submitBtn"
+              name="REQUEST SALES CALL"
+              type="submit"
+              form="register"
+              onClick={submitSalesCallRequest}
+              style={{
+                backgroundColor: "#E2520F",
+                margin: "-4px 0 0",
+                padding: "10px",
+                color: "white",
+                borderRadius: "9px",
+                borderColor: "#E2520F",
+                marginLeft: "56px",
+              }}
+            >
+              REQUEST SALES CALL
+            </button>
+          </div>
         </div>
+        {/* </main> */}
       </section>
     </main>
   );
 };
-
-export default Hundredmegabytes;
+export default ThirtyMegabytes;

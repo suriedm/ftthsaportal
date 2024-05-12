@@ -28,7 +28,7 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "./app/*"
       ]
     },
     "forceConsistentCasingInFileNames": true,
@@ -39,7 +39,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/pages/SignIn.js",
+    "app/SignIn.js",
     "build/types/**/*.ts"
   ],
   "exclude": [
