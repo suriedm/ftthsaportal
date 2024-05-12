@@ -392,7 +392,6 @@ const Fiftymegabytes: NextPage = () => {
     <main>
       <section
         className="form-container"
-        onSubmit={(event) => event.preventDefault()}
       >
         <br />
         <br />
@@ -407,7 +406,7 @@ const Fiftymegabytes: NextPage = () => {
             textAlign: "center",
           }}
         >
-          50MBPS PAYMENT PLAN<span className="text-red-500"></span>
+          50 MBPS PAYMENT PLAN<span className="text-red-500"></span>
         </h1>
         <br />
         <div className="group2">

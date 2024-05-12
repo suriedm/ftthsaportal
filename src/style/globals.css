@@ -287,8 +287,6 @@ p {
   background-color: rgb(226, 82, 15);
   border: 1px solid rgb(226, 82, 15);
   border-radius: 50%;
-  margin-left: 50%;
-  transform: translateX(-50%);
 }
 
 /* Media query for mobile devices */
@@ -367,7 +365,7 @@ p {
   background: #222155;
   width: 246px;
   overflow: hidden;
-  top: 60px;
+  top: 50px;
   color: #fff;
   max-height: 60vh;
   overflow-y: scroll;
@@ -766,23 +764,7 @@ main {
 .logo {
   position: relative;
 }
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
-  }
 
-  .card:hover span {
-    transform: translateX(4px);
-  }
-}
-
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
-}
 
 /* Mobile */
 @media (max-width: 700px) {
@@ -2579,19 +2561,8 @@ footer .logo {
   margin-top: 15px;
   cursor: pointer;
   font-size: 14px;
-  margin-left: 1%;
 }
-.btn-primary1 {
-  background-color: #e2520f;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 46px;
-  margin-top: 15px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 1%;
-}
+
 .login_box {
   width: 340px;
 
@@ -2858,22 +2829,6 @@ a {
   }
 }
 
-.form-control {
-  display: block;
-  width: 100%;
-  padding: 10px 15px;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
 
 .row {
   display: flex;
@@ -3066,15 +3021,7 @@ a {
   font-weight: bold;
   /* background: linear-gradient(to bottom right,#E2520F,#E2520F); */
 }
-.form-control {
-  /* margin: 1em 0; */
-  color: white;
-}
-.form-control:hover,
-.form-control:focus {
-  box-shadow: none;
-  border-color: #fff;
-}
+
 .username,
 .password {
   border: none;
@@ -3087,13 +3034,7 @@ a {
 
   width: 100%;
 }
-.form-control::-webkit-input-placeholder {
-  color: white;
-}
-.form-control:focus::-webkit-input-placeholder {
-  font-weight: bold;
-  color: #fff;
-}
+
 .login {
   padding: 6px 20px;
   border-radius: 20px;
@@ -3144,15 +3085,6 @@ a {
   }
 }
 
-.form-control {
-  /* margin: 1em 0; */
-  color: white;
-}
-.form-control:hover,
-.form-control:focus {
-  box-shadow: none;
-  border-color: #fff;
-}
 .username,
 .password {
   border: none;
@@ -3165,13 +3097,7 @@ a {
 
   width: 100%;
 }
-.form-control::-webkit-input-placeholder {
-  color: white;
-}
-.form-control:focus::-webkit-input-placeholder {
-  font-weight: bold;
-  color: #fff;
-}
+
 .login {
   padding: 6px 20px;
   border-radius: 20px;
@@ -3820,7 +3746,7 @@ p {
 
 #sidebar {
   max-width: 270px;
-  top: 60;
+  top: 50;
 }
 
 .wrapper {
@@ -3849,8 +3775,7 @@ p {
 .btn-primary1 {
   border: 1px solid #e2520f;
   border-radius: 50%;
-  margin-left: 50%;
-  transform: translateX(-50%);
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -4031,7 +3956,7 @@ button:hover {
   border-radius: var(--border-radius);
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 0.2s, border 0.2s;
+  /* transition: background 0.2s, border 0.2s; */
 }
 
 .card h2 {
@@ -4084,22 +4009,6 @@ button:hover {
   position: relative;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
-  }
-
-  .card:hover span {
-    transform: translateX(4px);
-  }
-}
-
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
-}
 
 @media (max-width: 700px) {
   .content {
@@ -5187,7 +5096,7 @@ footer .logo {
   background: #222155;
   width: 246px;
   overflow: hidden;
-  top: 60px;
+  top: 50px;
   color: #fff;
   max-height: 70vh;
   overflow-y: scroll;
@@ -5464,7 +5373,6 @@ footer .logo {
   margin-top: 15px;
   cursor: pointer;
   font-size: 14px;
-  margin-left: 1%;
 }
 
 .login_box {
@@ -5718,16 +5626,12 @@ a {
   width: 100%;
   padding: 10px 15px;
   font-size: 16px;
-  line-height: 1.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
 }
 
 @media (max-width: 767px) {
@@ -5930,16 +5834,6 @@ a {
   }
 }
 
-.form-control {
-  color: #fff;
-}
-
-.form-control:focus,
-.form-control:hover {
-  box-shadow: none;
-  border-color: #fff;
-}
-
 .password,
 .username {
   border-radius: 0;
@@ -5952,14 +5846,6 @@ a {
   width: 100%;
 }
 
-.form-control::-webkit-input-placeholder {
-  color: #fff;
-}
-
-.form-control:focus::-webkit-input-placeholder {
-  font-weight: 700;
-  color: #fff;
-}
 
 .login {
   padding: 6px 20px;
@@ -6239,7 +6125,7 @@ a {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 12px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   max-width: 100%;
   width: 100%;

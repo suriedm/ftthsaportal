@@ -66,22 +66,8 @@ export interface Profile {
   account_status: string;
 }
 
-interface UserData {
-  first_name: string;
-  last_name: string;
-  email: string;
-  contact_number: string;
-  street_address: string;
-  city: string;
-  suburbs: string;
-  password: string;
-  complex_building: string;
-}
-
 const UserProfile: NextPage = () => {
   const { push } = useRouter();
-  const parameters = useParams();
-
   const { userId, profile, setProfile } = authStore();
   const { subscriptions, deviceReference, setSubscription } =
     subscriptionStore();
@@ -89,49 +75,20 @@ const UserProfile: NextPage = () => {
 
   // const [image, setImage] = useState(null);
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-  const [image, setImage] = useState({ preview: "", raw: "" });
-  const [formValues, setFormValues] = useState(
-    profile ?? {
-      first_name: "",
-      last_name: "",
-      email: "",
-      mobile_number: "",
-      street_address: "",
-      city: "",
-      suburbs: "",
-      account_status: "",
-      complex_building: "",
-      // password: '',
+  const [formValues, setFormValues] = useState<Profile>();
+
+  useEffect(() => {
+    console.log("Form subscriptions: ", subscriptions);
+  }, [subscriptions]);
+
+  useEffect(() => {
+    if (profile) {
+      setFormValues(() => ({ ...profile }));
     }
-  );
-
-  useEffect(() => {
-    console.log("Form values:", formValues);
-  }, [formValues]);
-
-  useEffect(() => {
-    console.log("{userId, profile}:> ", { userId, profile });
     if (userId && !profile) {
       fetchUserData();
     }
   }, [userId, profile]);
-
-  const handleFormValues = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { id, value } = e.currentTarget;
-    setFormValues((current) => ({ ...current, [id]: value }));
-  };
-
-  const handleinput = (e: { taget: { first_name: any; value: any } }) => {
-    const { first_name, value } = e.taget;
-    setFormValues({ ...formValues, [first_name]: value });
-    console.log(formValues);
-  };
 
   const fetchUserData = async () => {
     console.log(userId);
@@ -203,12 +160,12 @@ const UserProfile: NextPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          first_name: formValues.first_name,
-          last_name: formValues.last_name,
-          mobile_number: formValues.mobile_number,
-          // city: formValues.city,
-          suburbs: formValues.suburbs,
-          street_address: formValues.street_address,
+          first_name: formValues?.first_name ?? "",
+          last_name: formValues?.last_name ?? "",
+          mobile_number: formValues?.mobile_number ?? "",
+          // city: formValues?.city,
+          suburbs: formValues?.suburbs ?? "",
+          street_address: formValues?.street_address ?? "",
         }),
       });
       if (response.ok) {
@@ -219,111 +176,11 @@ const UserProfile: NextPage = () => {
       }
     } catch (error) {
       console.error("Error updating user data:", error);
-    }
-  };
-
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e: { target: { files: any[] } }) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const onhandleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setFormValues((prevState) => ({
-      ...prevState,
-      profileImage: file,
-    }));
-  };
-
-  const onhandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted with values:", formValues);
-  };
-
-  const handleImageChange = (event: { target: { files: any[] } }) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      //  setImage(result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
     }
   };
 
   function onhandleChange(e: { target: { value: SetStateAction<string> } }) {
     setPassword(e.target.value);
-  }
-
-  async function forgotpassword() {
-    const url =
-      "https://stm-dev.intentio.co.za/api/portal/user/forgot-password";
-    const data = {
-      confirmation_email: "",
-      confirmation_mobile_number: "",
-    };
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
-        const result = await response.json();
-        console.log("forgot password Confirmed successfully");
-        // setMessage('forgot password successfully');
-        // window.location.href = "./otpconfirmation";
-        // clearTimeout(otpTimer);
-      } else {
-        console.error("Error confirming OTP:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error confirming OTP:", error);
-    }
-  }
-
-  const onhandlechange = (e: { target: { files: string | any[] } }) => {
-    if (e.target.files.length) {
-      setImage({
-        preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0],
-      });
-    }
-  };
-
-  async function Accountstatus() {
-    const url = `https://stm-dev.intentio.co.za/api/portal/subscriptions`;
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          account_status: formValues.account_status,
-        }),
-      });
-      if (response.ok) {
-        const result = await response.json();
-        console.log("User data updated successfully", result);
-      } else {
-        console.error("Error updating user data:");
-      }
-    } catch (error) {
-      console.error("Error updating user data:", error);
-    }
   }
 
   const onActivateHandler = () => {
@@ -351,11 +208,6 @@ const UserProfile: NextPage = () => {
     }
     console.log(deviceReference);
   };
-
-  function logout() {
-    // localStorage.removeItem("accessToken");
-    window.location.href = "/";
-  }
 
   return (
     <main>
@@ -412,7 +264,6 @@ const UserProfile: NextPage = () => {
                       </div>
                     </div>
                   </div>
-
                   <div className="col d-flex flex-column flex-sm-item-row justify-content-between mb-3">
                     <div className="text-center text-sm-left mb-2 mb-sm-0">
                       <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap"></h4>
@@ -452,7 +303,7 @@ const UserProfile: NextPage = () => {
                                   fontSize: "90%",
                                 }}
                               />
-                              {/* <input className="form-control" name="first_name" value={formValues.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
+                              {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
                               {/* /> */}
                             </div>
                             <div className="form-group">
@@ -471,9 +322,10 @@ const UserProfile: NextPage = () => {
                                 type="text"
                                 name=""
                                 placeholder=""
+                                value={userId ?? 0}
                                 style={{ borderRadius: "15px" }}
                               />
-                              {/* <input className="form-control" name="first_name" value={formValues.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
+                              {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
                               {/* /> */}
                             </div>
                             <div
@@ -503,7 +355,7 @@ const UserProfile: NextPage = () => {
                               >
                                 Activate
                               </button>
-                              {/* <input className="form-control" name="first_name" value={formValues.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
+                              {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
                               {/* /> */}
                             </div>
                           </div>
@@ -512,10 +364,8 @@ const UserProfile: NextPage = () => {
                     </div>
                   </div>
                 </div>
-                <ul className="nav nav-tabs">
-                  <li className="nav-item">
-                    <Link
-                      href=""
+                
+                    <h4
                       className="active nav-link"
                       style={{
                         color: "#E2520F",
@@ -525,9 +375,8 @@ const UserProfile: NextPage = () => {
                       }}
                     >
                       User Profile Name
-                    </Link>
-                  </li>
-                </ul>
+                    </h4>
+                 
                 <div className="tab-content pt-3">
                   <div className="tab-pane active">
                     <form className="form">
@@ -547,7 +396,7 @@ const UserProfile: NextPage = () => {
                             <input
                               className="form-control"
                               name="first_name"
-                              value={formValues.first_name}
+                              value={formValues?.first_name ?? ""}
                               onChange={handleSubmit}
                               style={{ borderRadius: "15px" }}
                             />
@@ -570,7 +419,7 @@ const UserProfile: NextPage = () => {
                               type="text"
                               name="last_name"
                               placeholder=""
-                              value={formValues.last_name}
+                              value={formValues?.last_name}
                               style={{ borderRadius: "15px" }}
                             />
                           </div>
@@ -591,7 +440,7 @@ const UserProfile: NextPage = () => {
                               className="form-control"
                               type="text"
                               placeholder=""
-                              value={formValues.email}
+                              value={formValues?.email}
                               style={{ borderRadius: "15px" }}
                             />
                           </div>
@@ -613,7 +462,7 @@ const UserProfile: NextPage = () => {
                               type="text"
                               placeholder=""
                               name="contact number"
-                              defaultValue={formValues.mobile_number}
+                              defaultValue={formValues?.mobile_number}
                               onChange={handleSubmit}
                               style={{ borderRadius: "15px" }}
                             />
@@ -636,7 +485,7 @@ const UserProfile: NextPage = () => {
                               type="text"
                               placeholder=""
                               name="address"
-                              value={formValues.street_address}
+                              value={formValues?.street_address}
                               onChange={handleSubmit}
                               style={{ borderRadius: "15px" }}
                             />
@@ -659,7 +508,7 @@ const UserProfile: NextPage = () => {
                               type="text"
                               name="complex_building"
                               placeholder=""
-                              value={formValues.complex_building}
+                              value={formValues?.complex_building}
                               onChange={handleSubmit}
                               style={{ borderRadius: "15px" }}
                             />
@@ -682,7 +531,7 @@ const UserProfile: NextPage = () => {
                               type="text"
                               name="city"
                               placeholder=""
-                              value={formValues.city}
+                              value={formValues?.city ?? ""}
                               onChange={handleSubmit}
                               style={{ borderRadius: "15px" }}
                             />
@@ -690,7 +539,7 @@ const UserProfile: NextPage = () => {
                         </div>
                       </div>
 
-                      <div
+                      <h4
                         className="mb-2"
                         style={{
                           color: "#E2520F",
@@ -699,8 +548,8 @@ const UserProfile: NextPage = () => {
                           paddingLeft: "9px",
                         }}
                       >
-                        <b>Router Details/Web Portal</b>
-                      </div>
+                        Router Details/Web Portal
+                      </h4>
                       <br />
                       <div className="item-row">
                         <div className="col">
@@ -748,21 +597,20 @@ const UserProfile: NextPage = () => {
                             />
                           </div>
                         </div>
+                        <button
+                          className="btn btn-primary1"
+                          type="submit"
+                          style={{
+                            backgroundColor: "#E2520F",
+                            border: "1px solid #E2520F",
+                            borderRadius: "9px",
+                          }}
+                        >
+                          Reset Router Password{" "}
+                        </button>
                       </div>
 
-                      <button
-                        className="btn btn-primary1"
-                        type="submit"
-                        style={{
-                          backgroundColor: "#E2520F",
-                          border: "1px solid #E2520F",
-                          borderRadius: "9px",
-                          marginLeft: "75%",
-                        }}
-                      >
-                        Reset Router Password{" "}
-                      </button>
-                      <div
+                      <h4
                         className="mb-2"
                         style={{
                           color: "#E2520F",
@@ -771,55 +619,39 @@ const UserProfile: NextPage = () => {
                           paddingLeft: "9px",
                         }}
                       >
-                        <b>Change Profile Password</b>
-                      </div>
+                        Change Profile Password
+                      </h4>
                       <br />
                       <div className="item-row">
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              <span className="d-none d-xl-inline">
-                                {" "}
-                                New Password{" "}
-                              </span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="password"
-                              placeholder=""
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "14px",
+                              fontWeight: "bold",
+                              paddingLeft: "9px",
+                            }}
+                          >
+                            <span className="d-none d-xl-inline">Password</span>
+                          </label>
+                          <input
+                            className="form-control"
+                            type="password"
+                            placeholder=""
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              <span className="d-none d-xl-inline">
-                                Password
-                              </span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="password"
-                              placeholder=""
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
-                        </div>
+                        <button
+                          className="btn btn-primary1"
+                          type="submit"
+                          style={{
+                            backgroundColor: "#E2520F",
+                            border: "1px solid #E2520F",
+                            borderRadius: "9px",
+                          }}
+                        >
+                          New Password{" "}
+                        </button>
                       </div>
 
                       <button

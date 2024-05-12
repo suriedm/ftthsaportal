@@ -384,8 +384,11 @@ const Hundredmegabytes: NextPage = () => {
   return (
     <main>
       <section
-        className="form-container"
-      >
+       className="form-container"
+       >
+         <br />
+         <br />
+         <br />
         <h1
           style={{
             color: "#E2520F",
@@ -398,7 +401,6 @@ const Hundredmegabytes: NextPage = () => {
         >
           100MBPS PAYMENT PLAN<span className="text-red-500"></span>
         </h1>
-        <br />
         <div className="group2">
           <div className="group">
             <form id="register" onSubmit={handleSubmit}>

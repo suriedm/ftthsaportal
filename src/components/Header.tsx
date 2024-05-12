@@ -194,7 +194,7 @@ export const Header = () => {
             height={110}
           />{" "}
         </Link>
-        <div style={{ display: "flex", width: "75px" }}>
+        <div style={{ display: "flex", width: "75px" , alignItems: "center"}}>
           <div
             style={{
               display: "flex",
