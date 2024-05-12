@@ -37,7 +37,6 @@ export default function RootLayout({
                   width: "100%",
                   display: "flex",
                   flexDirection: "row",
-                  paddingTop: "12px",
                 }}
               >
                 <Link href="https://www.facebook.com/profile.php?id=100077963720140&mibextid=LQQJ4d">

@@ -198,20 +198,16 @@ p {
 }
 
 .wrapper {
-  width: 100%;
-  max-width: 300px;
+  /* width: 100%;
+  max-width: 300px; */
   margin: 0 auto;
 }
 
 .menu-btn {
-  position: absolute;
-  left: 10px;
-  top: -22px;
   background: #222155;
   color: #fff;
-  height: 45px;
-  width: 45px;
-  z-index: 9999;
+  height: 36px;
+  width: 36px;
   border: 1px solid #263547;
   border-radius: 5px;
   cursor: pointer;
@@ -219,6 +215,7 @@ p {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  padding: 2px;
 }
 
 .menu-btn i {
@@ -263,7 +260,6 @@ p {
 /* Add more media queries as needed */
 
 .wrapper {
-  width: 300px;
   position: relative;
 }
 
@@ -930,7 +926,6 @@ main {
 
 .menu-btn {
   cursor: pointer;
-  left: 85%;
 }
 
 
@@ -3789,20 +3784,16 @@ p {
 }
 
 .wrapper {
-  width: 100%;
   max-width: 300px;
   margin: 0 auto;
 }
 
 .menu-btn {
-  position: absolute;
-  left: 10px;
-  top: -22px;
+ 
   background: #222155;
   color: #fff;
-  height: 45px;
-  width: 45px;
-  z-index: 9999;
+  height: 36px;
+  width: 36px;
   border: 1px solid #263547;
   border-radius: 5px;
   display: flex;
@@ -3833,7 +3824,7 @@ p {
 }
 
 .wrapper {
-  width: 300px;
+  /* width: 300px; */
   position: relative;
 }
 
@@ -3914,7 +3905,6 @@ p {
 
 #sidebar {
   width: 270px;
-  left: -4%;
 }
 
 #sidebar .list-items {
@@ -4257,7 +4247,7 @@ button:hover {
 }
 
 #sidebar {
-  left: -23vw;
+  left: -28vw;
   background-color: #222155;
   width: 100%;
   padding: 10px;

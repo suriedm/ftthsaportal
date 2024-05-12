@@ -194,26 +194,33 @@ export const Header = () => {
             height={110}
           />{" "}
         </Link>
-        <div style={{ display: "flex", width:"64px" }}>
+        <div style={{ display: "flex", width: "75px" }}>
           <div
             style={{
               display: "flex",
               flexDirection: "row",
-              marginRight: "4px",
+              marginRight: "8px",
             }}
           >
-            {profile ? <h6>{profile.first_name}</h6> : null}
-            <FontAwesomeIcon
+            {profile ? (
+              <h6 style={{ marginRight: "4px" }}>{profile.first_name}</h6>
+            ) : null}
+           
+           <FontAwesomeIcon
               icon={userId ? faUser : faLock}
               onClick={() => (userId ? null : toggleModal())}
               style={{ fontSize: "25px", color: userId ? "#222155" : "red" }}
             />
           </div>
-          <div className="wrapper">
-            <label onClick={()=>setMenuOpen(!menuOpen)} className="menu-btn" htmlFor="btn">
+            <label
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="menu-btn"
+              htmlFor="btn"
+            >
               <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
             </label>
-            <nav style={{display: menuOpen?"block": "none"}} id="sidebar">
+          <div className="wrapper">
+            <nav style={{ display: menuOpen ? "block" : "none" }} id="sidebar">
               <ul className="list-items">
                 <li>
                   {" "}
