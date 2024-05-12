@@ -12,6 +12,7 @@ export const Header = () => {
   const router = useRouter();
   const { userId, profile, setUserId } = authStore();
   const [showModal, setShowModal] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -193,7 +194,7 @@ export const Header = () => {
             height={110}
           />{" "}
         </Link>
-        <div style={{ display: "flex", minWidth:"48px" }}>
+        <div style={{ display: "flex", width:"64px" }}>
           <div
             style={{
               display: "flex",
@@ -209,10 +210,10 @@ export const Header = () => {
             />
           </div>
           <div className="wrapper">
-            <label className="menu-btn" htmlFor="btn">
+            <label onClick={()=>setMenuOpen(!menuOpen)} className="menu-btn" htmlFor="btn">
               <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
             </label>
-            <nav id="sidebar">
+            <nav style={{display: menuOpen?"block": "none"}} id="sidebar">
               <ul className="list-items">
                 <li>
                   {" "}
