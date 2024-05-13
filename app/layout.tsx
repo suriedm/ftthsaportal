@@ -24,11 +24,20 @@ export default function RootLayout({
           <div className="row">
             <div className="columns">
               <h3>PRIVACY POLICY</h3>
-              <p style={{ color: "#131D72" }}>Policy</p>
+
+              <Link href="https://ftthsa.co.za/privacy/">
+                {/* < FontAwesomeIcon icon={faFacebook} style={{ paddingTop: '9px', color:'white',paddingRight:'209%' }}/> */}
+
+                <p style={{ color: "#131D72" }}>Policy</p>
+              </Link>
             </div>
             <div className="columns">
               <h3>TERMS OF USE</h3>
-              <p style={{ color: "#131D72" }}>Ts & Cs</p>
+              <Link href="https://ftthsa.co.za/general-terms-and-conditions/">
+                {/* < FontAwesomeIcon icon={faFacebook} style={{ paddingTop: '9px', color:'white',paddingRight:'209%' }}/> */}
+
+                <p style={{ color: "#131D72" }}>Ts & Cs</p>
+              </Link>
             </div>
             <div className="columns">
               <h3>FOLLOW</h3>

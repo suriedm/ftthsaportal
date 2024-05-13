@@ -1118,6 +1118,7 @@ footer .logo {
   font-weight: 600;
   color: #131d72;
   font-size: 21px;
+  margin: 0;
 }
 
 .footer .widget2 .media img {
@@ -1988,13 +1989,7 @@ footer .logo {
   max-width: 200px;
 }
 
-.footer h5 {
-  font-weight: 500;
-  text-transform: capitalize;
-  font-weight: 600;
-  color: #131d72;
-  font-size: 21px;
-}
+
 
 .footer .widget2 .media img {
   margin-right: 20px;
@@ -4849,13 +4844,6 @@ footer .logo {
   max-width: 200px;
 }
 
-.footer h5 {
-  font-weight: 500;
-  text-transform: capitalize;
-  font-weight: 600;
-  color: #131d72;
-  font-size: 21px;
-}
 
 .footer .widget2 .media img {
   margin-right: 20px;
