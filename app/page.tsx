@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { subscriptionStore } from "../src/stores/Subscription";
 import { fibrePlans, rowItems } from "../src/utils/constants";
-import { RowItem } from "../src/components/RowItem";
+import RowItem  from "../src/components/RowItem";
 import { FibrePlan } from "../src/components/FibrePlan";
 
 interface PostObject {

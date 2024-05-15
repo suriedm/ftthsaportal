@@ -11,7 +11,7 @@ const RowItem = ({ image, link, title }: IRowItem) => {
   const { push } = useRouter();
   return (
     <div className="col">
-      <Image width={155} height={121} alt="" src={`/asset/${image}.png`} />
+      <Image width={150} height={150} alt="" src={`/asset/${image}.png`} />
       <button className="button2" onClick={() => push(link)} type="button">
         {title}
       </button>

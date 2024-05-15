@@ -20,11 +20,9 @@ export const FibrePlan = ({ link, size, list, amount }: IFibrePlan) => {
         </ul>
       </div>
 
-      <div className="button4">
-        <button onClick={() => push(link)} type="submit">
-          <h4 style={{ paddingTop: "9px" }}>SIGN UP NOW</h4>
-        </button>
-      </div>
+      <button className="button4" onClick={() => push(link)} type="button">
+        SIGN UP NOW
+      </button>
     </div>
   );
 };
