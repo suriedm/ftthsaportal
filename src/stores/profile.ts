@@ -7,8 +7,8 @@ type AuthStore = {
     refreshToken: string | undefined;
     userId: number | null;
     profile: Profile | null;
-    setUserId: (id: number) => void;
-    setProfile: (value: Profile) => void;
+    setUserId: (id: number | null) => void;
+    setProfile: (value: Profile | null) => void;
 
 
 }
@@ -20,8 +20,8 @@ export const authStore = create<AuthStore>()(
             refreshToken: undefined,
             userId: null,
             profile: null,
-            setUserId: (id: number) => set(state => ({ ...state, userId: id })),
-            setProfile: (value: Profile) => set(state => ({ ...state, profile: value }))
+            setUserId: (id: number | null) => set(state => ({ ...state, userId: id })),
+            setProfile: (value: Profile | null) => set(state => ({ ...state, profile: value }))
         }),
         {
             name: 'profile', // name of the item in the storage (must be unique)
