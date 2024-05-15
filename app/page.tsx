@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { subscriptionStore } from "../src/stores/Subscription";
 import { fibrePlans, rowItems } from "../src/utils/constants";
-import RowItem  from "../src/components/RowItem";
+import RowItem from "../src/components/RowItem";
 import { FibrePlan } from "../src/components/FibrePlan";
 
 interface PostObject {
@@ -155,14 +155,14 @@ const App: NextPage = () => {
           <b>Super Fast Affordable Fibre to Your Home Is Here!.</b>
         </p>
       </div>
-        <Image
-          src="/images/FTTH_SA-Banner-Image-1.png"
-          alt="Banner Image"
-          layout="responsive"
-          //  objectFit="cover"
-          className=""
-        />
-      
+      <Image
+        src="/images/FTTH_SA-Banner-Image-1.png"
+        alt="Banner Image"
+        layout="responsive"
+        //  objectFit="cover"
+        className=""
+      />
+
       {/* <div className="custom-search"> */}
       {/* <button className="custom-search-botton" type="submit" style={{backgroundColor:'#E2520F',color:'white',borderRadius: '100px',width:'150px',height:'42px',marginLeft:'353%', position: 'absolute',top:'2px',fontSize:'15px'}} onClick={handleSearch}><b>Check my coverage</b></button>   */}
       {/* <input type="text" className="custom-search-input" placeholder="Enter your address" value={address}  */}
@@ -211,24 +211,6 @@ const App: NextPage = () => {
             <span className="text-red-500"></span>
           </h1>
           <br />
-          {/* 
-            const fibrePlans = [
-             
-              {
-                  size: "100 Mbp",
-                  amount: "R1199",
-                  link: "/twenty-megabytes",
-                  list: [
-                    "Free Installation.",
-                    "Free Router.",
-                    "Free Connection.",
-                    "Activation Fee: R999",
-                    "Monthly Payment: R1199",
-                    "Total Payment: R2198"
-                  ]
-              },
-            ]
-          */}
           <div className="content1">
             {Object.values(fibrePlans).map((plan) => (
               <FibrePlan key={plan.size} {...plan} />
@@ -238,7 +220,6 @@ const App: NextPage = () => {
       </section>
       <br />
       <br />
-      {/* <script src="https://cdn.tailwindcss.com" async /> */}
       <br />
       <br />
       <section
@@ -336,34 +317,47 @@ const App: NextPage = () => {
           </div>
         </div>
       </section>
-      <section   style={{ backgroundColor: "#cccccc4", padding: "25px", display: "flex", flexDirection: "row" }}>
-          <div style={{display: "flex", flexDirection:"column", flexGrow: 2/3, padding: "4px"}}>
-            <h3 className="font-bold text-2xl leading-8 text-blue-950 ">
-              Coverage
-            </h3>
-            <p className="custom-text-copy" style={{ fontSize: "19px" }}>
-              We currently have a large fibre footprint but only offer cost
-              effective services in specific areas. If we are not able to offer
-              you services in your area or location we will refer you to a host
-              of our partner ISPâ€™s companyâ€™s
-            </p>
-            <button
-              className="button4"
-              onClick={() => push("/hundred-megabytes")}
-              type="submit"
-            >
-              {/* <h4 style={{ paddingLeft: "48px", paddingTop: "9px" }}> */}
-              <b>LEARN MORE</b>
-              {/* </h4> */}
-            </button>
-            {/* </div> */}
-          </div>
-            <Image
-              className="custom-media-image "
-              alt=""
-              src="/images/ITWWW-Fibre-Coverage-Map.jpg"
-            />
-          
+      <section
+        style={{
+          backgroundColor: "#cccccc4",
+          padding: "25px",
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 2 / 3,
+            padding: "4px",
+          }}
+        >
+          <h3 className="font-bold text-2xl leading-8 text-blue-950 ">
+            Coverage
+          </h3>
+          <p className="custom-text-copy" style={{ fontSize: "19px" }}>
+            We currently have a large fibre footprint but only offer cost
+            effective services in specific areas. If we are not able to offer
+            you services in your area or location we will refer you to a host of
+            our partner ISPâ€™s companyâ€™s
+          </p>
+          <button
+            className="button4"
+            onClick={() => push("/hundred-megabytes")}
+            type="submit"
+          >
+            {/* <h4 style={{ paddingLeft: "48px", paddingTop: "9px" }}> */}
+            <b>LEARN MORE</b>
+            {/* </h4> */}
+          </button>
+          {/* </div> */}
+        </div>
+        <Image
+          className="custom-media-image "
+          alt=""
+          src="/images/ITWWW-Fibre-Coverage-Map.jpg"
+        />
       </section>
 
       <section>
