@@ -3,14 +3,20 @@ import { faBars, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LOGO from "./images/LOGO.jpg";
 import { authStore } from "../stores/profile";
 import { useRouter } from "next/navigation";
+import { transactionStore } from "../stores/Transaction";
+import { subscriptionStore } from "../stores/Subscription";
+import useMouseLeave from 'use-mouse-leave';
 
 export const Header = () => {
   const router = useRouter();
-  const { userId, profile, setUserId } = authStore();
+  const [mouseLeft, ref] = useMouseLeave();
+  const { setTransaction } = transactionStore();
+  const { setSubscription } = subscriptionStore();
+  const { userId, profile, setUserId, setProfile } = authStore();
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -18,6 +24,18 @@ export const Header = () => {
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (mouseLeft) {
+      // The mouse has just left our element, time to
+      // run whatever it was we wanted to run on mouseleave:
+      // ...
+      setMenuOpen(false)
+    }
+  }, [mouseLeft]);
+  useEffect(() => {
+    console.log('📢 [Header.tsx:37] menuOpen ', menuOpen);
+  }, [menuOpen]);
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -90,7 +108,10 @@ export const Header = () => {
   }
 
   const handleLogout = () => {
-    // console.log("Searching for address:", address);
+    setProfile(null);
+    setUserId(null);
+    setTransaction([]);
+    setSubscription([]);
   };
 
   return (
@@ -120,7 +141,6 @@ export const Header = () => {
                 </span>
                 <br />
                 <br />
-                {/* <span onClick={toggleModal} className="close" style={{ marginLeft: '110%',paddingTop:'100%' }}>&times;</span> */}
                 <h2
                   style={{
                     marginTop: "-14%",
@@ -194,7 +214,7 @@ export const Header = () => {
             height={110}
           />{" "}
         </Link>
-        <div style={{ display: "flex", width: "75px" , alignItems: "center"}}>
+        <div style={{ display: "flex", width: "75px", alignItems: "center" }}>
           <div
             style={{
               display: "flex",
@@ -205,23 +225,23 @@ export const Header = () => {
             {profile ? (
               <h6 style={{ marginRight: "4px" }}>{profile.first_name}</h6>
             ) : null}
-           
-           <FontAwesomeIcon
+
+            <FontAwesomeIcon
               icon={userId ? faUser : faLock}
               onClick={() => (userId ? null : toggleModal())}
               style={{ fontSize: "25px", color: userId ? "#222155" : "red" }}
             />
           </div>
-            <label
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="menu-btn"
-              htmlFor="btn"
-            >
-              <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
-            </label>
+          <label
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="menu-btn"
+            htmlFor="btn"
+          >
+            <FontAwesomeIcon icon={faBars} style={{ fontSize: "25px" }} />
+          </label>
           <div className="wrapper">
             <nav style={{ display: menuOpen ? "block" : "none" }} id="sidebar">
-              <ul className="list-items">
+              <ul ref={ref} id="menuList" className="list-items">
                 <li>
                   {" "}
                   <Link href="/">

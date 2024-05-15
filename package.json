@@ -29,6 +29,7 @@
     "react-otp-input": "^3.1.1",
     "rewire": "^7.0.0",
     "sharp": "^0.33.3",
+    "use-mouse-leave": "^1.0.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
