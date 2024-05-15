@@ -230,7 +230,7 @@ const App: NextPage = () => {
             ]
           */}
           <div className="content1">
-            {fibrePlans.map((plan) => (
+            {Object.values(fibrePlans).map((plan) => (
               <FibrePlan key={plan.size} {...plan} />
             ))}
           </div>
