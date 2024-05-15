@@ -112,6 +112,7 @@ export const Header = () => {
     setUserId(null);
     setTransaction([]);
     setSubscription([]);
+    router.replace("/")
   };
 
   return (

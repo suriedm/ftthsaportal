@@ -28,6 +28,7 @@ const PlanForm = ({ plan }: Props) => {
   const [showOTP, setShowOTP] = useState(false);
   const [registrationResponse, setRegistrationResponse] =
     useState<RegistrationResponse>();
+
   const [formValues, setFormValues] = useState<PostObject>({
     role: "",
     first_name: "",
@@ -53,6 +54,7 @@ const PlanForm = ({ plan }: Props) => {
     //  ricaOne: null,
     //  ricaTwo: ull,
   });
+  
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
