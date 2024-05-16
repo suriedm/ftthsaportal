@@ -1,4 +1,5 @@
 export interface IFibrePlan {
+    productId: number;
     size: string;
     amount: string;
     link: string;

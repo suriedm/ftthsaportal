@@ -17,11 +17,13 @@ import InputLabel from "./InputLabel";
 import OTPModal from "./OTPModal";
 import CashPayments from "./CashPayments";
 import OrderSummary from "./OrderSummary";
+import { subscriptionStore } from "../stores/Subscription";
 
 interface Props {
   plan: plans;
 }
 const PlanForm = ({ plan }: Props) => {
+  const {setProductId} = subscriptionStore()
   const [formPlan] = useState<IFibrePlan>(fibrePlans[plan]);
   const { userId, setUserId } = authStore();
 
@@ -124,6 +126,7 @@ const PlanForm = ({ plan }: Props) => {
       const data: RegistrationResponse = await response.json();
       console.log(data);
       if (data.success) {
+        setProductId(formPlan.productId)
         setUserId(data.data.id);
         setRegistrationResponse(data);
 
@@ -149,6 +152,7 @@ const PlanForm = ({ plan }: Props) => {
       console.log(" [ files are missing");
     }
   }
+
   const onhandle = (event: { target: { name: any; checked: any } }) => {
     const { name, checked } = event.target;
     console.log("clicked", name);

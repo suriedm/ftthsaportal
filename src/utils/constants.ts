@@ -24,6 +24,7 @@ export const rowItems: IRowItem[] = [
 
 export const fibrePlans: Record<plans, IFibrePlan> = {
   10: {
+    productId: 1,
     size: "10 Mbp",
     amount: "R350",
     link: "/ten-megabytes",
@@ -36,6 +37,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   20: {
+    productId: 2,
     size: "20 Mbp",
     amount: "R599",
     link: "/twenty-megabytes",
@@ -49,6 +51,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   30: {
+    productId: 3,
     size: "30 Mbp",
     amount: "R899",
     link: "/thirty-megabytes",
@@ -62,6 +65,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   50: {
+    productId: 4,
     size: "50 Mbp",
     amount: "R999",
     link: "/fifty-megabytes",
@@ -75,6 +79,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   100: {
+    productId: 5,
     size: "100 Mbp",
     amount: "R1199",
     link: "/hundred-megabytes",

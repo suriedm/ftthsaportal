@@ -48,8 +48,10 @@ export interface PortalProduct {
 
 
 type SubscriptionStore = {
+  productId:number|null,
   subscriptionId:null,
   deviceReference: string | null;
+  setProductId: (id: number|null) => void;
   setDeviceReference: (Id: string) => void;
   subscriptions: Subscription[];
   setSubscription: (value: Subscription[]) => void;
@@ -61,9 +63,11 @@ export const subscriptionStore = create<SubscriptionStore>()(
   persist(
     (set, get) => ({
       subscriptions: [],
+      productId: null,
       deviceReference: null,
       subscriptionId:null,
       setId: (Id: string) => set(state => ({ ...state, subscriptionsid: Id })),
+      setProductId: (id: number|null) => set(state => ({ ...state, productId: id })),
       setDeviceReference: (Id: string) => set(state => ({ ...state, deviceReference: Id })),
       setSubscription: (value) => set(state => ({ ...state, subscriptions: value })),
     }), {

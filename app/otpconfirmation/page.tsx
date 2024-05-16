@@ -1,13 +1,13 @@
-"use client"
+"use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { SetStateAction, useEffect, useState } from "react";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from "react";
 import Link from "next/link";
-import { url } from "inspector";
 import { authStore } from "../../src/stores/profile";
 import type { NextPage } from "next";
+import { subscriptionStore } from "../../src/stores/Subscription";
 export interface RegistrationResponse {
   success: true;
   message: string;
@@ -21,19 +21,23 @@ export interface RegistrationErrorResponse {
   detail: number;
 }
 
-const Popup : NextPage = () => {
+const Popup: NextPage = () => {
   const { userId } = authStore();
   const [showPopup, setShowPopup] = useState(false);
   const [showPopup2, setShowPopup2] = useState(false);
   const closeButton = useRef(null);
   const closeButton2 = useRef(null);
+  const {productId} = subscriptionStore();
+
   useEffect(() => {
+    
     const timer = setTimeout(() => {
       setShowPopup(true);
       setShowPopup2(true);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
   useEffect(() => {
     if (showPopup && closeButton.current) {
       closeButton.current;
@@ -42,15 +46,19 @@ const Popup : NextPage = () => {
       closeButton2.current;
     }
   }, [showPopup, showPopup2]);
+
   const handleClose = () => {
     setShowPopup(false);
   };
+
   const handleClose2 = () => {
     setShowPopup2(false);
   };
+
   const [message, setMessage] = useState("");
   const [registrationResponse, setRegistrationResponse] =
     useState<RegistrationResponse>();
+
   const confirmSubscription2 = async () => {
     try {
       const response = await fetch(
@@ -67,7 +75,7 @@ const Popup : NextPage = () => {
             billing_auto_renew: true,
             application_type: "manual",
             device_reference: "",
-            portal_product_id: 1,
+            portal_product_id: productId,
             portal_end_customer_id: userId,
           }),
         }
@@ -98,7 +106,7 @@ const Popup : NextPage = () => {
             billing_auto_renew: true,
             application_type: "manual",
             device_reference: "",
-            portal_product_id: 1,
+            portal_product_id: productId,
             portal_end_customer_id: userId,
           }),
         }
@@ -114,15 +122,18 @@ const Popup : NextPage = () => {
       console.error("Error creating subscription:", error);
     }
   };
+
   function logout() {
     localStorage.removeItem("accessToken");
     window.location.href = "/";
   }
+
   const alert = <h2 style={{ color: "white" }}>{message}</h2>;
+
   return (
     <main>
       {/* <meta name="viewport" content="width=device-width, initial-scale=1"></meta> */}
-      
+
       {/* </header> */}
 
       {/* <link rel="icon" href="/favicon.ico" /> */}

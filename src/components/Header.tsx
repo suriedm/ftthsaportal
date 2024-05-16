@@ -15,7 +15,7 @@ export const Header = () => {
   const router = useRouter();
   const [mouseLeft, ref] = useMouseLeave();
   const { setTransaction } = transactionStore();
-  const { setSubscription } = subscriptionStore();
+  const { setSubscription, setProductId } = subscriptionStore();
   const { userId, profile, setUserId, setProfile } = authStore();
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -110,6 +110,7 @@ export const Header = () => {
   const handleLogout = () => {
     setProfile(null);
     setUserId(null);
+    setProductId(null);
     setTransaction([]);
     setSubscription([]);
     router.replace("/")
