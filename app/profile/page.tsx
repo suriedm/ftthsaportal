@@ -240,7 +240,8 @@ const UserProfile: NextPage = () => {
                           borderRadius: "45%",
                         }}
                       >
-                        {/* { <Image  alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '200px' }} src={''} /> } */}
+                        {/* { <Image  alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '200px' }} src={''} /> } 
+                        
                         <div className="mt-2">
                           <label
                             htmlFor="upload"
@@ -261,281 +262,217 @@ const UserProfile: NextPage = () => {
                             onChange={onhandleChange}
                           />
                         </div>
+                        */}
                       </div>
                     </div>
                   </div>
                   <div className="col d-flex flex-column flex-sm-item-row justify-content-between mb-3">
-                    <div className="text-center text-sm-left mb-2 mb-sm-0">
-                      <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap"></h4>
-                      <p className="mb-0"></p>
-                      <div className="text-muted">
-                        <small></small>
-                      </div>
-                      <div className="mt-2">
-                        <label className="">
-                          <i className="fa fa-fw fa-camera"></i>
-                        </label>
-                        <div className="tab-content pt-3">
-                          <div className="tab-pane active">
-                            <div className="form-group">
-                              <label
-                                style={{
-                                  color: "#E2520F",
-                                  fontSize: "14px",
-                                  fontWeight: "bold",
-                                  paddingLeft: "9px",
-                                }}
-                              >
-                                Account Status
-                              </label>
+                    <div className="form-group">
+                      <label
+                        style={{
+                          color: "#E2520F",
+                          fontSize: "12px",
+                          paddingLeft: "8px",
+                        }}
+                      >
+                        Account Status
+                      </label>
 
-                              <input
-                                className="form-control"
-                                type=""
-                                placeholder=""
-                                value={
-                                  subscriptions.length
-                                    ? subscriptions[0].subscription_status
-                                    : ""
-                                }
-                                style={{
-                                  borderRadius: "15px",
-                                  fontSize: "90%",
-                                }}
-                              />
-                              {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
-                              {/* /> */}
-                            </div>
-                            <div className="form-group">
-                              <label
-                                style={{
-                                  color: "#E2520F",
-                                  fontSize: "14px",
-                                  fontWeight: "bold",
-                                  paddingLeft: "9px",
-                                }}
-                              >
-                                Account Number:
-                              </label>
-                              <input
-                                className="form-control"
-                                type="text"
-                                name=""
-                                placeholder=""
-                                value={userId ?? 0}
-                                style={{ borderRadius: "15px" }}
-                              />
-                              {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
-                              {/* /> */}
-                            </div>
-                            <div
-                              className="item-row "
-                              style={{ marginTop: "16px" }}
-                            >
-                              <label
-                                style={{
-                                  color: "#E2520F",
-                                  fontSize: "14px",
-                                  fontWeight: "bold",
-                                  paddingLeft: "9px",
-                                }}
-                              >
-                                Activate Account
-                              </label>
-                              <button
-                                className="btn btn-primary"
-                                type="button"
-                                style={{
-                                  backgroundColor: "#E2520F",
-                                  border: "1px solid #E2520F ",
-                                  borderRadius: "5px",
-                                  marginTop: "-6%",
-                                }}
-                                onClick={() => onActivateHandler()}
-                              >
-                                Activate
-                              </button>
-                              {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
-                              {/* /> */}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <input
+                        className="form-control"
+                        type=""
+                        placeholder=""
+                        value={
+                          subscriptions.length
+                            ? subscriptions[0].subscription_status
+                            : ""
+                        }
+                        style={{
+                          borderRadius: "15px",
+                          fontSize: "90%",
+                        }}
+                      />
+                      {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
+                      {/* /> */}
+                    </div>
+                    <div className="form-group">
+                      <label
+                        style={{
+                          color: "#E2520F",
+                          fontSize: "12px",
+                          paddingLeft: "8px",
+                        }}
+                      >
+                        Account Number:
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name=""
+                        placeholder=""
+                        value={userId ?? 0}
+                        style={{ borderRadius: "15px" }}
+                      />
+                      {/* <input className="form-control" name="first_name" value={formValues?.first_name} onChange={handleSubmit} style={{ borderRadius: '15px' }} */}
+                      {/* /> */}
                     </div>
                   </div>
                 </div>
-                
-                    <h4
-                      className="active nav-link"
-                      style={{
-                        color: "#E2520F",
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        paddingLeft: "9px",
-                      }}
-                    >
-                      User Profile Name
-                    </h4>
-                 
+
+                <h4
+                  className="active nav-link"
+                  style={{
+                    color: "#E2520F",
+                    fontSize: "16px",
+                    paddingLeft: "16px",
+                  }}
+                >
+                  User Profile Name
+                </h4>
+
                 <div className="tab-content pt-3">
                   <div className="tab-pane active">
                     <form className="form">
-                      <div className="item-row">
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              First Name
-                            </label>
-                            <input
-                              className="form-control"
-                              name="first_name"
-                              value={formValues?.first_name ?? ""}
-                              onChange={handleSubmit}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+                      <div className="profile-field-container">
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            First Name
+                          </label>
+                          <input
+                            className="form-control"
+                            name="first_name"
+                            value={formValues?.first_name ?? ""}
+                            onChange={handleSubmit}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              Last Name
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              name="last_name"
-                              placeholder=""
-                              value={formValues?.last_name}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            Last Name
+                          </label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="last_name"
+                            placeholder=""
+                            value={formValues?.last_name}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              Email
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder=""
-                              value={formValues?.email}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            Email
+                          </label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            placeholder=""
+                            value={formValues?.email}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col mb-3">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              Contact Number
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder=""
-                              name="contact number"
-                              defaultValue={formValues?.mobile_number}
-                              onChange={handleSubmit}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            Contact Number
+                          </label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            placeholder=""
+                            name="contact number"
+                            defaultValue={formValues?.mobile_number}
+                            onChange={handleSubmit}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col mb-3">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              Address
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              placeholder=""
-                              name="address"
-                              value={formValues?.street_address}
-                              onChange={handleSubmit}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            Address
+                          </label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            placeholder=""
+                            name="address"
+                            value={formValues?.street_address}
+                            onChange={handleSubmit}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              Complex{" "}
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              name="complex_building"
-                              placeholder=""
-                              value={formValues?.complex_building}
-                              onChange={handleSubmit}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            Complex{" "}
+                          </label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="complex_building"
+                            placeholder=""
+                            value={formValues?.complex_building}
+                            onChange={handleSubmit}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              Suburb
-                            </label>
-                            <input
-                              className="form-control"
-                              type="text"
-                              name="city"
-                              placeholder=""
-                              value={formValues?.city ?? ""}
-                              onChange={handleSubmit}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            Suburb
+                          </label>
+                          <input
+                            className="form-control"
+                            type="text"
+                            name="city"
+                            placeholder=""
+                            value={formValues?.city ?? ""}
+                            onChange={handleSubmit}
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
                       </div>
 
@@ -543,60 +480,56 @@ const UserProfile: NextPage = () => {
                         className="mb-2"
                         style={{
                           color: "#E2520F",
-                          fontSize: "14px",
+                          fontSize: "16px",
                           fontWeight: "bold",
-                          paddingLeft: "9px",
+                          paddingLeft: "16px",
                         }}
                       >
                         Router Details/Web Portal
                       </h4>
                       <br />
-                      <div className="item-row">
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              <span className="d-none d-xl-inline">
-                                {" "}
-                                Router SSID Username{" "}
-                              </span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="password"
-                              placeholder=""
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+                      <div className="profile-field-container">
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            <span className="d-none d-xl-inline">
+                              {" "}
+                              Router SSID Username{" "}
+                            </span>
+                          </label>
+                          <input
+                            className="form-control"
+                            type="password"
+                            placeholder=""
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <label
-                              style={{
-                                color: "#E2520F",
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                                paddingLeft: "9px",
-                              }}
-                            >
-                              <span className="d-none d-xl-inline">
-                                Router SSID Password
-                              </span>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="password"
-                              placeholder=""
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </div>
+
+                        <div className="form-group">
+                          <label
+                            style={{
+                              color: "#E2520F",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
+                            }}
+                          >
+                            <span className="d-none d-xl-inline">
+                              Router SSID Password
+                            </span>
+                          </label>
+                          <input
+                            className="form-control"
+                            type="password"
+                            placeholder=""
+                            style={{ borderRadius: "15px" }}
+                          />
                         </div>
+
                         <button
                           className="btn btn-primary1"
                           type="submit"
@@ -614,22 +547,21 @@ const UserProfile: NextPage = () => {
                         className="mb-2"
                         style={{
                           color: "#E2520F",
-                          fontSize: "14px",
+                          fontSize: "16px",
                           fontWeight: "bold",
-                          paddingLeft: "9px",
+                          paddingLeft: "16px",
                         }}
                       >
                         Change Profile Password
                       </h4>
                       <br />
-                      <div className="item-row">
-                        <div className="form-group">
+                      <div className="profile-field-container">
+                        <div className="form-group" aria-colspan={2}>
                           <label
                             style={{
                               color: "#E2520F",
-                              fontSize: "14px",
-                              fontWeight: "bold",
-                              paddingLeft: "9px",
+                              fontSize: "12px",
+                              paddingLeft: "8px",
                             }}
                           >
                             <span className="d-none d-xl-inline">Password</span>
@@ -652,20 +584,18 @@ const UserProfile: NextPage = () => {
                         >
                           New Password{" "}
                         </button>
+                        <button
+                          className="btn btn-primary1"
+                          type="submit"
+                          style={{
+                            backgroundColor: "#E2520F",
+                            border: "1px solid #E2520F",
+                            borderRadius: "9px",
+                          }}
+                        >
+                          Reset Password
+                        </button>
                       </div>
-
-                      <button
-                        className="btn btn-primary1"
-                        type="submit"
-                        style={{
-                          backgroundColor: "#E2520F",
-                          border: "1px solid #E2520F",
-                          borderRadius: "9px",
-                          marginLeft: "75%",
-                        }}
-                      >
-                        Reset Password
-                      </button>
                     </form>
                   </div>
                 </div>
