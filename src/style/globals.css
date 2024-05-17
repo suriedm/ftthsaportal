@@ -1519,7 +1519,6 @@ ul {
 .button4 {
   padding: 6px 4px;
   height: 45px;
-  width: 80%;
   font-size: 0.7em;
   font-weight: bold;
   letter-spacing: 0.5px;
@@ -2830,6 +2829,17 @@ a {
   margin-right: 16px;
   justify-content: space-between;
   align-items: center;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.profile-field-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  background-color: #fff;
 }
 
 .item-row {
@@ -5273,25 +5283,6 @@ footer .logo {
   border-bottom: 1px solid rgba(33, 40, 50, 0.125);
 }
 
-.dataTable-input,
-.form-control {
-  display: block;
-  width: 30%;
-  padding: 7px;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1;
-  color: #69707a;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #c5ccd6;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 0.35rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
 .nav-borders .nav-link.active {
   color: #0061f2;
   border-bottom-color: #0061f2;
@@ -5581,7 +5572,6 @@ a {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
 }
 
 @media (max-width: 767px) {
@@ -5609,6 +5599,10 @@ a {
 
 .ban_img {
   position: relative;
+}
+.banner_image {
+  width: 100vw;
+  height: 50vh;
 }
 
 .ban_img img {
