@@ -159,8 +159,12 @@ const App: NextPage = () => {
         src="/images/FTTH_SA-Banner-Image-1.png"
         alt="Banner Image"
         layout="responsive"
+        width="0"
+        height="0"
+        sizes="100vw"
+        // fill={true}
         //  objectFit="cover"
-        className=""
+        className="banner_image"
       />
 
       {/* <div className="custom-search"> */}
@@ -323,14 +327,15 @@ const App: NextPage = () => {
           padding: "25px",
           display: "flex",
           flexDirection: "row",
+          paddingLeft: "36px",
+          paddingRight: "36px"
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            flexGrow: 2 / 3,
+            flexGrow: 0.5,
             padding: "4px",
+
           }}
         >
           <h3 className="font-bold text-2xl leading-8 text-blue-950 ">
@@ -348,12 +353,15 @@ const App: NextPage = () => {
             type="submit"
           >
             {/* <h4 style={{ paddingLeft: "48px", paddingTop: "9px" }}> */}
-            <b>LEARN MORE</b>
+            LEARN MORE
             {/* </h4> */}
           </button>
           {/* </div> */}
         </div>
         <Image
+          sizes="100%"
+          width="0"
+          height="0"
           className="custom-media-image "
           alt=""
           src="/images/ITWWW-Fibre-Coverage-Map.jpg"
@@ -362,7 +370,10 @@ const App: NextPage = () => {
 
       <section>
         <Image
+          sizes="100vw"
           alt=""
+          width="0"
+          height="0"
           className="showcase"
           src="/images/FTTH_SA-Banner-Image-Free-installation-1.png"
         />
