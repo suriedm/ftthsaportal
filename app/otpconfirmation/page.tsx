@@ -22,7 +22,7 @@ export interface RegistrationErrorResponse {
 }
 
 const Popup: NextPage = () => {
-  const { userId } = authStore();
+  const { userId,profile } = authStore();
   const [showPopup, setShowPopup] = useState(false);
   const [showPopup2, setShowPopup2] = useState(false);
   const closeButton = useRef(null);
@@ -71,7 +71,7 @@ const Popup: NextPage = () => {
           body: JSON.stringify({
             date_start: new Date().toISOString().split("T")[0],
             subscription_initialisation_type: "onceoff",
-            preferred_payment_method: "creditcard",
+            preferred_payment_method:profile?.preferred_payment_method??"creditcard",
             billing_auto_renew: true,
             application_type: "manual",
             device_reference: "",
