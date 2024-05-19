@@ -65,7 +65,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   50: {
-    productId: 4,
+    productId: 3,
     size: "50 Mbp",
     amount: "R999",
     link: "/fifty-megabytes",
@@ -79,7 +79,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   100: {
-    productId: 5,
+    productId: 4,
     size: "100 Mbp",
     amount: "R1199",
     link: "/hundred-megabytes",
