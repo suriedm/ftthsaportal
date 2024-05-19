@@ -64,6 +64,7 @@ export interface Profile {
   postal_address: string;
   date_updated: string;
   account_status: string;
+  preferred_payment_method:string;
 }
 
 const UserProfile: NextPage = () => {
