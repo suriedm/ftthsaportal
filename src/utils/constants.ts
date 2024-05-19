@@ -51,7 +51,7 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   30: {
-    productId: 3,
+    productId: 6,
     size: "30 Mbp",
     amount: "R899",
     link: "/thirty-megabytes",
@@ -93,7 +93,6 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
 }
-
 export const planRoles = [
   "FTTHSA OFFICES",
   "WCSS",
