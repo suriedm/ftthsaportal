@@ -69,18 +69,21 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
 
   async function forgotPassword() {
     setLoading(true);
-    const url = "https://stm-dev.intentio.co.za/api/portal";
+
+    const params = new URLSearchParams({
+      mobile_number: formData.mobile_number,
+      username: formData.mobile_number,
+    });
+    
+    const url = `https://stm-dev.intentio.co.za/api/portal/user/forgot-password?${params}`;
 
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          accept: "application/json",
+          "content-type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({
-          mobile_number: formData.mobile_number,
-          username: formData.mobile_number,
-        }),
       });
 
       if (!response.ok) {
