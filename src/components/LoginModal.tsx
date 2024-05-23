@@ -60,6 +60,7 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
       // setDeviceReference(data.device_reference);
       setUserId(data.portal_end_customer_id);
       alert("Successfully logged in as: " + formData.username);
+      onClose()
       router.push("./profile?username=" + formData.username);
     } else {
       alert("Incorrect password or username. Please try again.");
@@ -84,6 +85,9 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
 
       if (!response.ok) {
         console.warn("Invalid credentials. Please try again.");
+      } else{
+        // what are you gonna do now? 
+        //onClose()
       }
 
       // window.location.href = "./profile";
@@ -99,13 +103,13 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
       id="login"
       className="modal fade"
       role="dialog"
-      style={{ display: "block" }}
+      style={{ display: isOpen?"block": "hidden" }}
     >
       <div className="modal-dialog1">
         <div className="modal-content1">
           <div className="modal-body1">
             <span
-              onClick={toggleModal}
+              onClick={onClose}
               className="close"
               style={{
                 position: "absolute",
