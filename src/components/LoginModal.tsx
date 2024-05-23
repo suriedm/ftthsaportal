@@ -60,7 +60,7 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
       // setDeviceReference(data.device_reference);
       setUserId(data.portal_end_customer_id);
       alert("Successfully logged in as: " + formData.username);
-      onClose()
+      onClose();
       router.push("./profile?username=" + formData.username);
     } else {
       alert("Incorrect password or username. Please try again.");
@@ -85,8 +85,8 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
 
       if (!response.ok) {
         console.warn("Invalid credentials. Please try again.");
-      } else{
-        // what are you gonna do now? 
+      } else {
+        // what are you gonna do now?
         //onClose()
       }
 
@@ -103,7 +103,7 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
       id="login"
       className="modal fade"
       role="dialog"
-      style={{ display: isOpen?"block": "hidden" }}
+      style={{ display: isOpen ? "block" : "hidden" }}
     >
       <div className="modal-dialog1">
         <div className="modal-content1">
@@ -135,10 +135,7 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
             </h2>
             <br />
             <br />
-            <form
-              onSubmit={handleSubmit}
-              className="d-flex justify-content-center "
-            >
+            <form className="d-flex justify-content-center ">
               <input
                 type="text"
                 name="username"
@@ -169,7 +166,9 @@ const LoginModal = ({ isOpen, onClose }: Props) => {
                   required
                 />
               )}
-              <button type="submit">Submit</button>
+              <button onClick={handleSubmit} type="button">
+                Submit
+              </button>
             </form>
           </div>
           <a
