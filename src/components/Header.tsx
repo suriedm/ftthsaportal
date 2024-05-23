@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import LOGO from "./images/LOGO.jpg";
 import { authStore } from "../stores/profile";
 import { useRouter } from "next/navigation";
 import { transactionStore } from "../stores/Transaction";
 import { subscriptionStore } from "../stores/Subscription";
-import useMouseLeave from 'use-mouse-leave';
+import useMouseLeave from "use-mouse-leave";
+import LoginModal from "./LoginModal";
 
 export const Header = () => {
   const router = useRouter();
@@ -19,93 +19,23 @@ export const Header = () => {
   const { userId, profile, setUserId, setProfile } = authStore();
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
 
   useEffect(() => {
     if (mouseLeft) {
       // The mouse has just left our element, time to
       // run whatever it was we wanted to run on mouseleave:
       // ...
-      setMenuOpen(false)
+      setMenuOpen(false);
     }
   }, [mouseLeft]);
+
   useEffect(() => {
-    console.log('📢 [Header.tsx:37] menuOpen ', menuOpen);
+    console.log("📢 [Header.tsx:37] menuOpen ", menuOpen);
   }, [menuOpen]);
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
-
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    console.log(formData);
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  async function login() {
-    const response = await fetch(
-      "https://stm-dev.intentio.co.za/api/portal/user/login",
-      {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          ...formData,
-          grant_type: "",
-          scope: "",
-          client_id: "",
-          client_secret: "",
-        }),
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      // localStorage.setItem("accessToken", data.access_token);
-      // localStorage.setItem("deviceReference",data.devicereference);
-      // setDeviceReference(data.device_reference);
-      setUserId(data.portal_end_customer_id);
-      alert("Successfully logged in as: " + formData.username);
-      router.push("./profile?username=" + formData.username);
-    } else {
-      alert("Incorrect password or username. Please try again.");
-    }
-  }
-
-  async function forgotPassword() {
-    const url = "";
-    const formData = {
-      username: "",
-      mobile_number: "",
-    };
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        console.warn("Invalid credentials. Please try again.");
-      }
-
-      // window.location.href = "./profile";
-    } catch (error) {
-      console.error("Login error:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   const handleLogout = () => {
     setProfile(null);
@@ -113,92 +43,12 @@ export const Header = () => {
     setProductId(null);
     setTransaction([]);
     setSubscription([]);
-    router.replace("/")
+    router.replace("/");
   };
 
   return (
     <header className="header">
-      {showModal && (
-        <div
-          id="login"
-          className="modal fade"
-          role="dialog"
-          style={{ display: "block" }}
-        >
-          <div className="modal-dialog1">
-            <div className="modal-content1">
-              <div className="modal-body1">
-                <span
-                  onClick={toggleModal}
-                  className="close"
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                    marginRight: "103px",
-                    marginTop: "9px",
-                  }}
-                >
-                  &times;
-                </span>
-                <br />
-                <br />
-                <h2
-                  style={{
-                    marginTop: "-14%",
-                    color: "white",
-                    paddingRight: "3px",
-                    fontSize: "27px",
-                  }}
-                >
-                  Login
-                </h2>
-                <br />
-                <br />
-                <form className="d-flex justify-content-center ">
-                  <input
-                    type="text"
-                    name="username"
-                    className="username form-control"
-                    placeholder="Username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                  />
-                  <br />
-                  <input
-                    type="password"
-                    name="password"
-                    className="password form-control"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                  <br />
-
-                  <input
-                    className="btn login"
-                    type="button"
-                    onClick={login}
-                    value="Login"
-                    style={{ backgroundColor: " #e2520f" }}
-                  />
-                  {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
-                  <a
-                    href=""
-                    style={{ color: "white", paddingLeft: "29%" }}
-                    onClick={forgotPassword}
-                  >
-                    {" "}
-                    Forgot Password
-                  </a>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {showModal && <LoginModal isOpen={showModal} onClose={()=>setShowModal(false)} />}
       <nav
         style={{
           display: "flex",
@@ -235,7 +85,7 @@ export const Header = () => {
             />
           </div>
           <label
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={toggleModal}
             className="menu-btn"
             htmlFor="btn"
           >
