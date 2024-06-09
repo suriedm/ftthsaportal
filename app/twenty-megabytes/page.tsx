@@ -1,7 +1,6 @@
 "use client";
 import type { NextPage } from "next";
 import PlanForm from "../../src/components/PlanForm";
-
 const TwentyMegabytes: NextPage = () => {
   return (
     <main>

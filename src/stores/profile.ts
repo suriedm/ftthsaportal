@@ -6,8 +6,10 @@ type AuthStore = {
     accessToken: string | undefined;
     refreshToken: string | undefined;
     userId: number | null;
+    wifi_ssid: number | null;
     profile: Profile | null;
     setUserId: (id: number | null) => void;
+    setwifi_ssid:(id:number | null ) => void;
     setProfile: (value: Profile | null) => void;
 
 
@@ -20,12 +22,14 @@ export const authStore = create<AuthStore>()(
             refreshToken: undefined,
             userId: null,
             profile: null,
+            wifi_ssid:null,
+            setwifi_ssid: (id: number | null) => set(state => ({ ...state, wifi_ssid: id })),
             setUserId: (id: number | null) => set(state => ({ ...state, userId: id })),
             setProfile: (value: Profile | null) => set(state => ({ ...state, profile: value }))
         }),
         {
-            name: 'profile', // name of the item in the storage (must be unique)
-            storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+            name: 'profile', 
+            storage: createJSONStorage(() => localStorage), 
         }));
 
 

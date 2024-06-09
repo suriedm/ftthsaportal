@@ -2,6 +2,7 @@ import React from "react";
 import { IRowItem } from "../utils/interfaces";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import homeSuccess from "@/SuccessPayment/page"
 /*
 link: string
     image: string

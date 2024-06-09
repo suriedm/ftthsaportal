@@ -1,8 +1,19 @@
 import { createStore } from 'zustand/vanilla';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { Profile } from '../../app/profile/page';
+import { Profile, WifiData } from '../../app/profile/page';
 import { persist, createJSONStorage } from 'zustand/middleware'
+import { plans } from '../utils/interfaces';
+export interface Root {
+  success: boolean
+  message: string
+  data: Data
+}
+
+export interface Data {
+  wifi_ssid: string
+  wifi_password: string
+}
 export interface SubscriptionsResponse {
   success: boolean
   message: string
@@ -10,6 +21,7 @@ export interface SubscriptionsResponse {
 }
 
 export interface Subscription {
+  subscriptionId: any;
   subscription_initialisation_type: string
   preferred_payment_method: string
   billing_auto_renew: boolean
@@ -24,7 +36,10 @@ export interface Subscription {
   subscription_status: string
   date_created: string
   date_updated: string
-  portal_product: PortalProduct
+subscription_account_reference:string
+wifi_password:string
+wifi_ssid:string
+
 }
 
 export interface PortalProduct {
@@ -49,11 +64,16 @@ export interface PortalProduct {
 
 type SubscriptionStore = {
   productId:number|null,
+  plan:plans|null,
+  wifi_ssid:string|null,
+  wifi_password:string|null,
   subscriptionId:null,
   deviceReference: string | null;
+  setPlan: (id: plans|null) => void;
   setProductId: (id: number|null) => void;
   setDeviceReference: (Id: string) => void;
   subscriptions: Subscription[];
+  setWifiDetails: (value: WifiData) => void;
   setSubscription: (value: Subscription[]) => void;
 
 
@@ -63,13 +83,18 @@ export const subscriptionStore = create<SubscriptionStore>()(
   persist(
     (set, get) => ({
       subscriptions: [],
+      plan: null,
       productId: null,
       deviceReference: null,
+      wifi_ssid:null,
+      wifi_password:null,
       subscriptionId:null,
       setId: (Id: string) => set(state => ({ ...state, subscriptionsid: Id })),
+      setPlan: (id: plans|null) => set(state => ({ ...state, plan: id })),
       setProductId: (id: number|null) => set(state => ({ ...state, productId: id })),
       setDeviceReference: (Id: string) => set(state => ({ ...state, deviceReference: Id })),
       setSubscription: (value) => set(state => ({ ...state, subscriptions: value })),
+      setWifiDetails: (value) => set(state => ({ ...state, wifi_ssid: value.wifi_ssid??null, wifi_password: value.wifi_password??null})),
     }), {
     name: 'subscription',
     storage: createJSONStorage(() => localStorage),

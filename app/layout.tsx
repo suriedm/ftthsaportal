@@ -9,23 +9,29 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-
+import Terms from"../app/Terms/page"
+import Policy from"../app/Policy/page"
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  function push(arg0: string): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <html lang="en">
       <body>
-        <Header />
+         <Header /> 
         {children}
+        <br/><br/><br/>
         <footer className="footer ">
           <div className="row">
             <div className="columns">
               <h3>PRIVACY POLICY</h3>
 
-              <Link href="https://ftthsa.co.za/privacy/">
+              <Link href="/Policy" >
                 {/* < FontAwesomeIcon icon={faFacebook} style={{ paddingTop: '9px', color:'white',paddingRight:'209%' }}/> */}
 
                 <p style={{ color: "#131D72" }}>Policy</p>
@@ -33,7 +39,7 @@ export default function RootLayout({
             </div>
             <div className="columns">
               <h3>TERMS OF USE</h3>
-              <Link href="https://ftthsa.co.za/general-terms-and-conditions/">
+              <Link  href="/Terms">
                 {/* < FontAwesomeIcon icon={faFacebook} style={{ paddingTop: '9px', color:'white',paddingRight:'209%' }}/> */}
 
                 <p style={{ color: "#131D72" }}>Ts & Cs</p>
@@ -78,22 +84,22 @@ export default function RootLayout({
             <div className="columns">
               <h3>CONTACT US</h3>
 
-              <h5 style={{ color: "#131D72" }}>Sales</h5>
+              <h5 style={{ color: "#131D72",}}>Sales</h5>
               <p style={{ color: "#131D72" }}>sales@ftthsa.co.za</p>
 
-              <h5 style={{ color: "#131D72" }}>Support</h5>
+              <h5 style={{ color: "#131D72", }}>Support</h5>
               <p style={{ color: "#131D72" }}>support@gplat.co.za</p>
-              <h5 style={{ color: "#131D72" }}>Call Center</h5>
+              <h5 style={{ color: "#131D72", }}>Call Center</h5>
               <p style={{ color: "#131D72" }}>0861 777 889</p>
             </div>
           </div>
 
           <div className="copy-right-sec">
             <i className="fa-solid fa-copyright"></i>
-            FTTHSA, a product of Global Platinum Solutions.{" "}
+            FTTHSA, a product of Global Platinum Solutions.{" "}<br/>
             <a href="#">Designed by DM333</a>
             <Image
-              style={{ paddingLeft: "36%", width: "58%" }}
+              style={{ paddingLeft: "36%", width: "28%" }}
               src="/images/PayGate-Card-Brand-Logos-PayGate.png"
               width={150}
               height={150}

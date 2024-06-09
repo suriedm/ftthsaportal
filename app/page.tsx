@@ -9,7 +9,8 @@ import { subscriptionStore } from "../src/stores/Subscription";
 import { fibrePlans, rowItems } from "../src/utils/constants";
 import RowItem from "../src/components/RowItem";
 import { FibrePlan } from "../src/components/FibrePlan";
-
+import SuccessModal from "../src/components/SuccessModal";
+import FailureModal from "../src/components/FailedPayment";
 interface PostObject {
   message: string;
   role: string;
@@ -30,6 +31,7 @@ interface PostObject {
   alternate_contact_number: string;
   password: string;
   city: string;
+  Terms:string;
   // ricaOne: File | null;
   //  ricaTwo: File | null;
 }
@@ -64,6 +66,7 @@ const App: NextPage = () => {
     password: "",
     message: "",
     city: "",
+    Terms:"",
     //  ricaOne: null,
     //  ricaTwo: ull,
   });
@@ -156,17 +159,16 @@ const App: NextPage = () => {
         </p>
       </div>
       <Image
-        src="/images/FTTH_SA-Banner-Image-1.png"
+        src="/images/FTTH_SA-Banner-Image.jpeg"
         alt="Banner Image"
+        width={2122}
+          height={121}
         layout="responsive"
-        width="0"
-        height="0"
-        sizes="100vw"
-        // fill={true}
         //  objectFit="cover"
-        className="banner_image"
+        className=""
       />
-
+     {/* <SuccessModal/> */}
+      {/* <SuccessModal/> */}
       {/* <div className="custom-search"> */}
       {/* <button className="custom-search-botton" type="submit" style={{backgroundColor:'#E2520F',color:'white',borderRadius: '100px',width:'150px',height:'42px',marginLeft:'353%', position: 'absolute',top:'2px',fontSize:'15px'}} onClick={handleSearch}><b>Check my coverage</b></button>   */}
       {/* <input type="text" className="custom-search-input" placeholder="Enter your address" value={address}  */}
@@ -193,14 +195,16 @@ const App: NextPage = () => {
 
           ]
         */}
+        
         <div className="row">
           {rowItems.map((item) => (
             <RowItem key={item.title} {...item} />
           ))}
         </div>
         {/* </div> */}
-      </section>
-
+      </section>     
+      
+     
       <section style={{ backgroundColor: "#cccccc14" }}>
         <div>
           <h1
@@ -232,9 +236,10 @@ const App: NextPage = () => {
       >
         <div>
           <h2 className="text-blue-950 font-bold text-4xl lowecase relative h-auto w-full pb-1 text-center">
-            See why now is the best time to super boost your home <br />
-            entertainment or business Internet
-            <span className="text-red-500"></span>
+            WHY CHOOSE US
+            {/* See why now is the best time to super boost your home <br /> */}
+            {/* entertainment or business Internet */}
+            <span className="text-red-600"></span>
           </h2>
         </div>
 
@@ -327,55 +332,54 @@ const App: NextPage = () => {
           padding: "25px",
           display: "flex",
           flexDirection: "row",
-          paddingLeft: "36px",
-          paddingRight: "36px"
         }}
       >
         <div
           style={{
-            flexGrow: 0.5,
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 2 / 3,
             padding: "4px",
-
           }}
         >
-          <h3 className="font-bold text-2xl leading-8 text-blue-950 ">
+
+<div>
+        </div>
+          <h2 className="font-bold text-2xl leading-8 text-blue-950 ">
             Coverage
-          </h3>
+          </h2>
           <p className="custom-text-copy" style={{ fontSize: "19px" }}>
             We currently have a large fibre footprint but only offer cost
-            effective services in specific areas. If we are not able to offer
-            you services in your area or location we will refer you to a host of
-            our partner ISPâ€™s companyâ€™s
+            effective services in specific areas.<br/> If we are not able to offer
+            you services in your area or location <br/>we will refer you to a host of
+            our partner ISPâ€™s company
           </p>
+          <br/>
           <button
-            className="button4"
+            className="button5"
             onClick={() => push("/hundred-megabytes")}
             type="submit"
           >
             {/* <h4 style={{ paddingLeft: "48px", paddingTop: "9px" }}> */}
-            LEARN MORE
+            <b>LEARN MORE</b>
             {/* </h4> */}
           </button>
           {/* </div> */}
         </div>
         <Image
-          sizes="100%"
-          width="0"
-          height="0"
           className="custom-media-image "
           alt=""
           src="/images/ITWWW-Fibre-Coverage-Map.jpg"
+          width={525} height={1}
         />
       </section>
 
       <section>
         <Image
-          sizes="100vw"
           alt=""
-          width="0"
-          height="0"
           className="showcase"
           src="/images/FTTH_SA-Banner-Image-Free-installation-1.png"
+          width={825} height={151}
         />
       </section>
     </main>

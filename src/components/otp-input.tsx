@@ -124,7 +124,7 @@ const Otp = () => {
         aria-label="OTP Verification"
         style={{
           backgroundColor: "#E2520F",
-          width: "80%",
+          width: "90%",
           maxWidth: "500px",
           margin: "13% auto",
           padding: "2%",
@@ -154,7 +154,7 @@ const Otp = () => {
               style={{
                 width: `${100 / otp.length}%`,
                 margin: "0.5%",
-                padding: "1%",
+                // padding: "1%",
                 borderRadius: "3px",
                 boxSizing: "border-box",
                 textAlign: "center",
@@ -173,6 +173,7 @@ const Otp = () => {
           <br />
           <h2 style={{ textAlign: "center" }}>{message}</h2>
         </form>
+        <br/>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button
             type="submit"

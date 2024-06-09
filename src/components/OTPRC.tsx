@@ -8,7 +8,7 @@ interface Props {
   open: boolean;
   onClose: () => void;
 }
-const OTPModal = ({ email, mobile, id, open, onClose }: Props) => {
+const OTPRC = ({ email, mobile, id, open, onClose }: Props) => {
   const router = useRouter();
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -82,7 +82,7 @@ const OTPModal = ({ email, mobile, id, open, onClose }: Props) => {
       console.log("OTP Confirmed successfully ", result);
       alert("OTP Confirmed successfully");
       onClose();
-      router.push("/otpconfirmation");
+      router.push("/Requestcall");
       // window.location.href = "./otpconfirmation";
     } catch (error) {
       console.error("Error confirming OTP:", error);
@@ -245,4 +245,4 @@ const OTPModal = ({ email, mobile, id, open, onClose }: Props) => {
   );
 };
 
-export default OTPModal;
+export default OTPRC;

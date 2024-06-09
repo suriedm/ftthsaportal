@@ -9,7 +9,7 @@ export const FibrePlan = ({ link, size, list, amount }: IFibrePlan) => {
       <h2 className="title">{size}</h2>
       <div className="view">
         <div className="cost">
-          <h4 className="amount">{amount}</h4>
+          <h4 className="amount">R{amount}</h4>
         </div>
       </div>
       <div className="description">

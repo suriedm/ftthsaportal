@@ -14,23 +14,24 @@ import {
   planRoles,
 } from "../utils/constants";
 import InputLabel from "./InputLabel";
+import OTPRC from "./OTPRC";
 import OTPModal from "./OTPModal";
 import CashPayments from "./CashPayments";
 import OrderSummary from "./OrderSummary";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { subscriptionStore } from "../stores/Subscription";
-
 interface Props {
   plan: plans;
 }
 const PlanForm = ({ plan }: Props) => {
-  const {setProductId} = subscriptionStore()
+  const {setProductId, setPlan} = subscriptionStore()
   const [formPlan] = useState<IFibrePlan>(fibrePlans[plan]);
   const { userId, setUserId } = authStore();
 
   const [showOTP, setShowOTP] = useState(false);
+  const [showOTPRC, setShowOTPRC] = useState(false);
   const [registrationResponse, setRegistrationResponse] =
     useState<RegistrationResponse>();
-
   const [formValues, setFormValues] = useState<PostObject>({
     role: "",
     first_name: "",
@@ -49,20 +50,22 @@ const PlanForm = ({ plan }: Props) => {
     mobile_number: "",
     alternate_contact_number: "",
     password: "",
-    message: "",
+     message: "",
     city: "",
     application_type: "",
-    preferred_payment_method: "",
-    //  ricaOne: null,
+    preferred_payment_method: "", 
+    confirmPassword:"",
+    // application_type:""
+    
+ //  ricaOne: null,
     //  ricaTwo: ull,
   });
-  
   const [isChecked, setIsChecked] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
   const [isChecked4, setIsChecked4] = useState(false);
-
+  const [isChecked6, setIsChecked6] = useState(false);
   const handleChange = (event: { target: { name: any; checked: any } }) => {
     const { name, checked } = event.target;
     console.log("clicked", name);
@@ -88,6 +91,18 @@ const PlanForm = ({ plan }: Props) => {
       } else {
         setFormValues((current) => ({ ...current, identification_type: "" }));
       }
+   if (name === "Terms & Conditions") {
+        setIsChecked6(checked);
+        if (checked) {
+          setIsChecked1(false);
+          setFormValues((current) => ({
+            ...current,
+            identification_type: "Terms & Conditions ",
+          }));
+        } else {
+          setFormValues((current) => ({ ...current, Terms: "" }));
+        }
+      }
     }
   };
 
@@ -102,6 +117,7 @@ const PlanForm = ({ plan }: Props) => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+  
     
     try {
       const response = await fetch(
@@ -114,22 +130,24 @@ const PlanForm = ({ plan }: Props) => {
           body: JSON.stringify(formValues),
         }
       );
-
+  
       if (!response.ok) {
         const failed: RegistrationErrorResponse = await response.json();
-        //to have the log in json form
+        // Log in JSON format
         console.error(JSON.stringify(failed, null, "\t"));
         alert(failed.detail);
-
+  
         throw new Error("Network response was not ok");
       }
+  
       const data: RegistrationResponse = await response.json();
       console.log(data);
+  
       if (data.success) {
-        setProductId(formPlan.productId)
+        setPlan(plan);
+        setProductId(formPlan.productId);
         setUserId(data.data.id);
         setRegistrationResponse(data);
-
         setShowOTP(true);
       } else {
         console.error("Submission unsuccessful:", data);
@@ -138,7 +156,64 @@ const PlanForm = ({ plan }: Props) => {
       console.error("Error:", error);
     }
   };
+  
 
+  const submitSalesCallRequest = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    try {
+        const response = await fetch(
+            "https://stm-dev.intentio.co.za/api/portal/user/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...formValues,
+                    application_type: "salesagent",
+                }),
+            }
+        );
+        if (!response.ok) {
+            const failed = await response.json();
+            console.error(JSON.stringify(failed, null, "\t"));
+            alert(failed.detail);
+
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data);
+
+        if (data.success) {
+            setProductId(formPlan.productId);
+            setUserId(data.data.id);
+            setRegistrationResponse(data);
+            setShowOTPRC(true);
+        } else {
+            alert("Your information is successfully submitted to a Sales agent call ");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { files, id } = e.target;
     if (files) {
@@ -170,13 +245,13 @@ const PlanForm = ({ plan }: Props) => {
           preferred_payment_method: "",
         }));
       }
-    } else if (name === "CASH/SCODE") {
+    } else if (name === "cash") {
       setIsChecked4(checked);
       if (checked) {
         setIsChecked3(false);
         setFormValues((current) => ({
           ...current,
-          preferred_payment_method: "CASH/SCODE ",
+          preferred_payment_method: "cash",
         }));
       } else {
         setFormValues((current) => ({
@@ -187,7 +262,7 @@ const PlanForm = ({ plan }: Props) => {
     }
   };
 
-  const submitSalesCallRequest = async () => {
+  const submitSalesCallReques = async () => {
     try {
       const salesCallResponse = await fetch(
         "https://stm-dev.intentio.co.za/api/portal/user/register",
@@ -229,7 +304,65 @@ const PlanForm = ({ plan }: Props) => {
       console.error("Error:", error);
     }
   };
+  
+   
+    const togglePasswordVisibility = () => {
+      setShowPassword((prevState) => !prevState);
+    }
+    const toggleConfirmPasswordVisibility = () => {
+      setshowConfirmPassword((prevState) => !prevState);
+    };
+    async function uploadFile() {
+      const form = new FormData();
+      form.append('file', file);
+  
+      try {
+          const response = await fetch(`${url}?portal_end_customer_id=${portal_Customer_id}&document_type=${documentType}`, {
+              method: 'POST',
+              headers: {
+                  'accept': 'application/json'
+                  // Note: 'Content-Type' should not be set to 'multipart/form-data' manually when using FormData
+                  // The browser will automatically set the correct 'Content-Type' including the boundary
+              },
+              body: form
+          });
+  
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+  
+          const result = await response.json();
+          return result;
+      } catch (error) {
+          console.error('Error uploading file:', error);
+          throw error;
+      }
+  }
+  const file = new File([''], 'id ',  { type: 'image/png' });
+  const url = 'https://stm-dev.intentio.co.za/api/portal/user/upload-file';
+  const portal_Customer_id =registrationResponse?.data.id;
+  const documentType = 'id';
+  uploadFile()
+      .then(result => {
+          console.log('File uploaded successfully:', result);
+      })
+      .catch(error => {
+          console.error('File upload failed:', error);
+      });
+  
 
+
+
+
+
+
+
+
+
+
+
+
+  
   return (
     <form id="register" onSubmit={handleSubmit}>
       {showOTP ? (
@@ -239,6 +372,16 @@ const PlanForm = ({ plan }: Props) => {
           email={formValues.email}
           open={showOTP}
           onClose={() => setShowOTP(false)}
+        />
+      ) : null}
+      
+      {showOTPRC ? (
+        <OTPRC
+          id={registrationResponse?.data.id ?? 0}
+          mobile={formValues.mobile_number}
+          email={formValues.email}
+          open={showOTPRC}
+          onClose={() => setShowOTPRC(false)}
         />
       ) : null}
 
@@ -252,11 +395,12 @@ const PlanForm = ({ plan }: Props) => {
           fontFamily: "sans-serif",
         }}
       >
-        <b> {`${formPlan.size} MBPS PAYMENT PLAN`}</b>
+        <b> {`${formPlan.size} PAYMENT PLAN`}</b>
         <span className="text-red-500"></span>
       </h1>
       <br />
       <hr></hr>
+      <br/>
       <p
         style={{
           paddingLeft: "-37px",
@@ -270,6 +414,7 @@ const PlanForm = ({ plan }: Props) => {
         Select FTTH sales representative that assisted you:
         <span className="text-red-500"></span>
       </p>
+      <br/>
       <select
         id="role"
         name="role"
@@ -288,6 +433,7 @@ const PlanForm = ({ plan }: Props) => {
           </option>
         ))}
       </select>
+      
       <div className="zeile">
         <div className="input-container">
           <br />
@@ -314,10 +460,13 @@ const PlanForm = ({ plan }: Props) => {
               color: "#263547",
               paddingBottom: "20px",
               fontFamily: "sans-serif",
+              marginRight:"1%"
+              
             }}
             onChange={handleChange}
             checked={isChecked1}
             value={formValues.identification_type}
+            
           />
           <InputLabel id="radioA-label" label="RSAID" />
         </div>
@@ -341,13 +490,14 @@ const PlanForm = ({ plan }: Props) => {
           <br />
           <br />
           <input
-            style={{ color: "#263547" }}
+            style={{ color: "#263547" ,marginRight:"1%" }}
             id="passport"
             type="checkbox"
             name="passport"
             onChange={handleChange}
             checked={isChecked2}
             value={formValues.identification_type}
+
           />
 
           <InputLabel id="radioA" label="Passport (Non SA)" />
@@ -560,26 +710,79 @@ const PlanForm = ({ plan }: Props) => {
           </div>
         </div>
 
-        <div className="input-container">
-          <InputLabel id="password" label="Create Password" />
+        <div className="input-container" style={{ position: 'relative', width: '100%' }}>
+      <InputLabel id="password" label="Create Password" />
+      <input
+        type={showPassword ? "text" : "password"}
+        name="password"
+        id="password"
+        placeholder="Enter your password"
+        value={formValues.password}
+        onChange={handleFormValues}
+        maxLength={8}
+        required
+        style={{
+          width: "89%",
+          padding: "8px 40px 8px 8px", 
+          fontFamily: "sans-serif",
+        }}
+      />
 
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            // value={formValues.mobile_number}
-            value={formValues.password}
-            onChange={handleFormValues}
-            maxLength={8}
-            required
-            style={{
-              width: "96%",
-              padding: "8px",
-              fontFamily: "sans-serif",
-            }}
-          />
-        </div>
+      <button 
+        type="button" 
+        onClick={togglePasswordVisibility} 
+        style={{
+          position: 'absolute',
+          left: '289px',
+          top: '50%',
+          transform: 'translateY(-30%)',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          padding: '8px',
+          fontFamily: 'sans-serif',
+        }}
+      >
+        {showPassword ? <FaEyeSlash /> : <FaEye />}
+      </button>
+  
+    </div>
+    <div className="input-container" style={{ position: 'relative', width: '100%' }}>
+      <InputLabel id="ConfirmPassword" label="ConfirmPassword" />
+      <input
+        type={showPassword ? "text" : "password"}
+        name="password"
+        id="password"
+        placeholder="Enter your password"
+        value={formValues.password}
+        onChange={handleFormValues}
+        maxLength={8}
+        required
+        style={{
+          width: "89%",
+          padding: "8px 40px 8px 8px", 
+          fontFamily: "sans-serif",
+        }}
+      />
+
+      <button 
+        type="button" 
+        onClick={toggleConfirmPasswordVisibility} 
+        style={{
+          position: 'absolute',
+          left: '289px',
+          top: '50%',
+          transform: 'translateY(-30%)',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          padding: '8px',
+          fontFamily: 'sans-serif',
+        }}
+      >
+      {showPassword ? <FaEyeSlash /> : <FaEye />}
+      </button>  
+    </div>
       </div>
       <br />
       <br />
@@ -677,16 +880,16 @@ const PlanForm = ({ plan }: Props) => {
               id="acceptTerms"
               label="I Accept the Terms & Conditions"
             />
-
+            
             <br />
             <input
-              id="radioA"
-              type="checkbox"
-              value="Terms & Conditions"
-              name="Terms & Conditions"
-              className="custom-checkbox"
-              onChange={handleChange}
-              checked={isChecked1}
+             id="Terms & Conditions"
+             type="checkbox"
+             name="Terms & Conditions"
+             onChange={handleChange}
+             checked={isChecked1}
+             
+            //  value={formValues.identification_type}
             />
             <InputLabel id="radioA" label="Yes" />
           </div>
@@ -720,8 +923,9 @@ const PlanForm = ({ plan }: Props) => {
           name="creditcard"
           onChange={onhandle}
           checked={isChecked3}
+          style={{marginRight:"1%"}}
         />
-        <InputLabel id="checkbox3" label="CREDIT CARD/DEBIT CARD" />
+        <InputLabel id="checkbox3" label="CREDIT CARD/DEBIT CARD"  />
 
         <br />
         <input
@@ -729,17 +933,20 @@ const PlanForm = ({ plan }: Props) => {
           id="VOUCHER"
           onChange={handleChange}
           checked={isChecked}
+          style={{marginRight:"1%"}}
         />
         <InputLabel id="radioA-label" label="VOUCHER" />
         <br />
         <input
           type="checkbox"
-          id="CASH/SCODE"
-          name="CASH/SCODE"
+          id="cash"
+          name="cash"
           onChange={onhandle}
           checked={isChecked4}
+          style={{marginRight:"1%"}}
+          
         />
-        <InputLabel id="radioA-label" label="* CASH/SCODE" />
+        <InputLabel id="checkbox4" label="CASH/SCODE" />
 
         <br />
         <CashPayments />

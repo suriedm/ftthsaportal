@@ -1,5 +1,4 @@
 import { useRef } from "react";
-
 interface FileInputProps {
   id: string;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,7 +6,6 @@ interface FileInputProps {
   value: File | null;
   label: string;
 }
-
 export const FileInput = ({
   id,
   label,
@@ -16,7 +14,6 @@ export const FileInput = ({
   handleFileChange,
 }: FileInputProps) => {
   const uploaderRef = useRef<HTMLInputElement>(null);
-
   return (
     <>
       <h5 style={{ fontWeight: "medium", marginTop: 3, marginBottom: 1 }}>
@@ -64,9 +61,7 @@ export const FileInput = ({
           >
             {`Upload ${label}`}
           </button>
-
           {value?.name && <p>{`${value?.name.substring(0, 8)}...`}</p>}
-
           <input
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -84,6 +79,7 @@ export const FileInput = ({
             onClick={clearFile}
             style={{
               paddingLeft: 2,
+              cursor: "pointer",
               height: "full",
               fontSize: 12,
               fontWeight: "bold",

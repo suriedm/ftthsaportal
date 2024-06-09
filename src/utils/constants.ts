@@ -25,8 +25,9 @@ export const rowItems: IRowItem[] = [
 export const fibrePlans: Record<plans, IFibrePlan> = {
   10: {
     productId: 1,
-    size: "10 Mbp",
-    amount: "R350",
+    size: "10 Mbps",
+    amount: "350",
+    activation: "399",
     link: "/ten-megabytes",
     list: [
       "Free Installation.",
@@ -38,8 +39,9 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
   },
   20: {
     productId: 2,
-    size: "20 Mbp",
-    amount: "R599",
+    size: "20 Mbps",
+    amount: "599",
+    activation: "399",
     link: "/twenty-megabytes",
     list: [
       "Free Installation.",
@@ -51,9 +53,10 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   30: {
-    productId: 3,
-    size: "30 Mbp",
-    amount: "R899",
+    productId: 6,
+    size: "30 Mbps",
+    amount: "899",
+    activation: "399",
     link: "/thirty-megabytes",
     list: [
       "Free Installation.",
@@ -65,9 +68,10 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   50: {
-    productId: 4,
-    size: "50 Mbp",
-    amount: "R999",
+    productId: 3,
+    size: "50 Mbps",
+    amount: "999",
+    activation: "399",
     link: "/fifty-megabytes",
     list: [
       "Free Installation.",
@@ -79,9 +83,10 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
   100: {
-    productId: 5,
-    size: "100 Mbp",
-    amount: "R1199",
+    productId: 4,
+    size: "100 Mbps",
+    amount: "1199",
+    activation: "999",
     link: "/hundred-megabytes",
     list: [
       "Free Installation.",
@@ -93,7 +98,6 @@ export const fibrePlans: Record<plans, IFibrePlan> = {
     ]
   },
 }
-
 export const planRoles = [
   "FTTHSA OFFICES",
   "WCSS",

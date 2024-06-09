@@ -2,6 +2,7 @@ export interface IFibrePlan {
     productId: number;
     size: string;
     amount: string;
+    activation: activationFee;
     link: string;
     list: string[];
 }
@@ -12,6 +13,7 @@ export interface IRowItem {
     title: string
 }
 export interface PostObject {
+    confirmPassword: string;
     message: string;
     role: string;
     first_name: string;
@@ -51,3 +53,4 @@ export interface RegistrationErrorResponse {
 }
 
 export type plans = "10" | "20" | "30" | "50" | "100";
+export type activationFee = "999" | "399" ;
