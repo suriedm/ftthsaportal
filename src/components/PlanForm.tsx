@@ -24,7 +24,7 @@ interface Props {
   plan: plans;
 }
 const PlanForm = ({ plan }: Props) => {
-  const {setProductId, setPlan} = subscriptionStore()
+  const {setProductId} = subscriptionStore()
   const [formPlan] = useState<IFibrePlan>(fibrePlans[plan]);
   const { userId, setUserId } = authStore();
 
@@ -66,6 +66,9 @@ const PlanForm = ({ plan }: Props) => {
   const [isChecked3, setIsChecked3] = useState(false);
   const [isChecked4, setIsChecked4] = useState(false);
   const [isChecked6, setIsChecked6] = useState(false);
+  const [formData, setFormData] = useState({
+    preferred_payment_method:"",
+  });
   const handleChange = (event: { target: { name: any; checked: any } }) => {
     const { name, checked } = event.target;
     console.log("clicked", name);
@@ -144,7 +147,6 @@ const PlanForm = ({ plan }: Props) => {
       console.log(data);
   
       if (data.success) {
-        setPlan(plan);
         setProductId(formPlan.productId);
         setUserId(data.data.id);
         setRegistrationResponse(data);
@@ -213,7 +215,7 @@ const PlanForm = ({ plan }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const [showConfirmPassword, setshowConfirmPassword] = useState(false);
-  
+    const [error, setError] = useState("");
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { files, id } = e.target;
     if (files) {
@@ -304,8 +306,6 @@ const PlanForm = ({ plan }: Props) => {
       console.error("Error:", error);
     }
   };
-  
-   
     const togglePasswordVisibility = () => {
       setShowPassword((prevState) => !prevState);
     }
@@ -313,25 +313,20 @@ const PlanForm = ({ plan }: Props) => {
       setshowConfirmPassword((prevState) => !prevState);
     };
     async function uploadFile() {
-      const form = new FormData();
-      form.append('file', file);
-  
+      const formData = new FormData();
+      formData.append('file', file);
       try {
           const response = await fetch(`${url}?portal_end_customer_id=${portal_Customer_id}&document_type=${documentType}`, {
               method: 'POST',
               headers: {
                   'accept': 'application/json'
-                  // Note: 'Content-Type' should not be set to 'multipart/form-data' manually when using FormData
-                  // The browser will automatically set the correct 'Content-Type' including the boundary
               },
-              body: form
+               body: formData
           });
-  
           if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
           }
-  
-          const result = await response.json();
+         const result = await response.json();
           return result;
       } catch (error) {
           console.error('Error uploading file:', error);
@@ -350,7 +345,13 @@ const PlanForm = ({ plan }: Props) => {
           console.error('File upload failed:', error);
       });
   
-
+      const handleConfirmPasswordBlur = () => {
+        if (formValues.password !== formValues.confirmPassword) {
+          setError("Passwords do not match");
+        } else {
+          setError("");
+        }
+      };
 
 
 
@@ -710,80 +711,84 @@ const PlanForm = ({ plan }: Props) => {
           </div>
         </div>
 
-        <div className="input-container" style={{ position: 'relative', width: '100%' }}>
-      <InputLabel id="password" label="Create Password" />
-      <input
-        type={showPassword ? "text" : "password"}
-        name="password"
-        id="password"
-        placeholder="Enter your password"
-        value={formValues.password}
-        onChange={handleFormValues}
-        maxLength={8}
-        required
-        style={{
-          width: "89%",
-          padding: "8px 40px 8px 8px", 
-          fontFamily: "sans-serif",
-        }}
-      />
+        <div className="input-container" style={{ position: "relative", width: "100%" }}>
+        <InputLabel id="password" label="Create Password" />
+        <input
+          type={showPassword ? "text" : "password"}
+          name="password"
+          id="password"
+          placeholder="Enter your password"
+          value={formValues.password}
+          onChange={handleFormValues}
+          maxLength={8}
+          required
+          style={{
+            width: "89%",
+            padding: "8px 40px 8px 8px",
+            fontFamily: "sans-serif",
+          }}
+        />
 
-      <button 
-        type="button" 
-        onClick={togglePasswordVisibility} 
-        style={{
-          position: 'absolute',
-          left: '289px',
-          top: '50%',
-          transform: 'translateY(-30%)',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: '8px',
-          fontFamily: 'sans-serif',
-        }}
-      >
-        {showPassword ? <FaEyeSlash /> : <FaEye />}
-      </button>
-  
-    </div>
-    <div className="input-container" style={{ position: 'relative', width: '100%' }}>
-      <InputLabel id="ConfirmPassword" label="ConfirmPassword" />
-      <input
-        type={showPassword ? "text" : "password"}
-        name="password"
-        id="password"
-        placeholder="Enter your password"
-        value={formValues.password}
-        onChange={handleFormValues}
-        maxLength={8}
-        required
-        style={{
-          width: "89%",
-          padding: "8px 40px 8px 8px", 
-          fontFamily: "sans-serif",
-        }}
-      />
-
-      <button 
-        type="button" 
-        onClick={toggleConfirmPasswordVisibility} 
-        style={{
-          position: 'absolute',
-          left: '289px',
-          top: '50%',
-          transform: 'translateY(-30%)',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: '8px',
-          fontFamily: 'sans-serif',
-        }}
-      >
-      {showPassword ? <FaEyeSlash /> : <FaEye />}
-      </button>  
-    </div>
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          style={{
+            position: "absolute",
+            left: "289px",
+            top: "39%",
+            transform: "translateY(-30%)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px",
+            fontFamily: "sans-serif",
+          }}
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </button>
       </div>
+      <div className="input-container" style={{ position: "relative", width: "100%" }}>
+        <InputLabel id="ConfirmPassword" label="Confirm Password" />
+        <input
+          type={showConfirmPassword ? "text" : "password"}
+          name="confirmPassword"
+          id="confirmPassword"
+          placeholder="Confirm your password"
+          value={formValues.confirmPassword}
+          onChange={handleFormValues}
+          onBlur={handleConfirmPasswordBlur}
+          maxLength={8}
+          required
+          style={{
+            width: "85%",
+            padding: "8px 40px 8px 8px",
+            fontFamily: "sans-serif",
+            borderColor: error ? "red" : "", 
+          }}
+        />
+
+        <button
+          type="button"
+          onClick={toggleConfirmPasswordVisibility}
+          style={{
+            position: "absolute",
+            left: "289px",
+            top: "39%",
+            transform: "translateY(-30%)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px",
+            fontFamily: "sans-serif",
+          }}
+        >
+          {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+        </button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
+     
+      </div>
+      
       <br />
       <br />
       <br />
@@ -926,16 +931,6 @@ const PlanForm = ({ plan }: Props) => {
           style={{marginRight:"1%"}}
         />
         <InputLabel id="checkbox3" label="CREDIT CARD/DEBIT CARD"  />
-
-        <br />
-        <input
-          type="checkbox"
-          id="VOUCHER"
-          onChange={handleChange}
-          checked={isChecked}
-          style={{marginRight:"1%"}}
-        />
-        <InputLabel id="radioA-label" label="VOUCHER" />
         <br />
         <input
           type="checkbox"
