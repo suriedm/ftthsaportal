@@ -20,11 +20,13 @@ import CashPayments from "./CashPayments";
 import OrderSummary from "./OrderSummary";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { subscriptionStore } from "../stores/Subscription";
+import Link from "next/link";
+import { profile } from "console";
 interface Props {
   plan: plans;
 }
 const PlanForm = ({ plan }: Props) => {
-  const {setProductId} = subscriptionStore()
+  const {setProductId, setPlan} = subscriptionStore()
   const [formPlan] = useState<IFibrePlan>(fibrePlans[plan]);
   const { userId, setUserId } = authStore();
 
@@ -66,9 +68,6 @@ const PlanForm = ({ plan }: Props) => {
   const [isChecked3, setIsChecked3] = useState(false);
   const [isChecked4, setIsChecked4] = useState(false);
   const [isChecked6, setIsChecked6] = useState(false);
-  const [formData, setFormData] = useState({
-    preferred_payment_method:"",
-  });
   const handleChange = (event: { target: { name: any; checked: any } }) => {
     const { name, checked } = event.target;
     console.log("clicked", name);
@@ -121,7 +120,23 @@ const PlanForm = ({ plan }: Props) => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
   
-    
+    const requiredFields = [
+      "role", "first_name", "last_name", "identification_reference", 
+      "identification_type", "mobile_number", "email", "password", "confirmPassword",
+      "complex_building",
+      "unit_number",
+      "street_address",
+      "postal_code",
+      "postal_address",
+      // "alternate_contact_number",
+      "city",
+    ];
+    const emptyFields = requiredFields.filter(field => !formValues[field as keyof PostObject]);
+  
+    if (emptyFields.length > 0) {
+      alert(`Please fill the following fields: ${emptyFields.join(", ")}`);
+      return;
+    }
     try {
       const response = await fetch(
         "https://stm-dev.intentio.co.za/api/portal/user/register",
@@ -147,6 +162,7 @@ const PlanForm = ({ plan }: Props) => {
       console.log(data);
   
       if (data.success) {
+        setPlan(plan);
         setProductId(formPlan.productId);
         setUserId(data.data.id);
         setRegistrationResponse(data);
@@ -159,7 +175,11 @@ const PlanForm = ({ plan }: Props) => {
     }
   };
   
-
+  
+  const [formData, setFormData] = useState({
+    portal_Customer_id:"",
+    
+  });
   const submitSalesCallRequest = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
@@ -211,11 +231,10 @@ const PlanForm = ({ plan }: Props) => {
 
 
 
-
     const [showPassword, setShowPassword] = useState(false);
-
-    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
     const [error, setError] = useState("");
+    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { files, id } = e.target;
     if (files) {
@@ -306,52 +325,52 @@ const PlanForm = ({ plan }: Props) => {
       console.error("Error:", error);
     }
   };
+  
+   
     const togglePasswordVisibility = () => {
       setShowPassword((prevState) => !prevState);
     }
     const toggleConfirmPasswordVisibility = () => {
       setshowConfirmPassword((prevState) => !prevState);
     };
-    async function uploadFile() {
-      const formData = new FormData();
-      formData.append('file', file);
+    async function uploadFile(file: string | Blob, documentType: string | Blob) {
+      const portal_Customer_id = formData.portal_Customer_id; 
+      const url = `https://stm-dev.intentio.co.za/api/portal/user/upload-file/${portal_Customer_id}`;
+
       try {
-          const response = await fetch(`${url}?portal_end_customer_id=${portal_Customer_id}&document_type=${documentType}`, {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('documentType', documentType);
+
+          const response = await fetch(url, {
               method: 'POST',
+              body: formData,
               headers: {
-                  'accept': 'application/json'
-              },
-               body: formData
+                  'Accept': 'application/json'
+              }
           });
+
           if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
+              throw new Error('Network response was not ok');
           }
-         const result = await response.json();
+
+          const result = await response.json();
+          console.log('File uploaded successfully:', result);
           return result;
       } catch (error) {
           console.error('Error uploading file:', error);
           throw error;
       }
   }
-  const file = new File([''], 'id ',  { type: 'image/png' });
-  const url = 'https://stm-dev.intentio.co.za/api/portal/user/upload-file';
-  const portal_Customer_id =registrationResponse?.data.id;
-  const documentType = 'id';
-  uploadFile()
-      .then(result => {
-          console.log('File uploaded successfully:', result);
-      })
-      .catch(error => {
-          console.error('File upload failed:', error);
-      });
   
-      const handleConfirmPasswordBlur = () => {
-        if (formValues.password !== formValues.confirmPassword) {
+  const handleConfirmPasswordBlur = () => {
+      if (formValues.password !== formValues.confirmPassword) {
           setError("Passwords do not match");
-        } else {
+      } else {
           setError("");
-        }
-      };
+      }
+  };
+  
 
 
 
@@ -711,6 +730,8 @@ const PlanForm = ({ plan }: Props) => {
           </div>
         </div>
 
+        
+
         <div className="input-container" style={{ position: "relative", width: "100%" }}>
         <InputLabel id="password" label="Create Password" />
         <input
@@ -785,10 +806,9 @@ const PlanForm = ({ plan }: Props) => {
           {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
         </button>
         {error && <p style={{ color: "red" }}>{error}</p>}
+ 
+    </div>
       </div>
-     
-      </div>
-      
       <br />
       <br />
       <br />
@@ -881,10 +901,14 @@ const PlanForm = ({ plan }: Props) => {
         <br />
         <div className="zeile">
           <div className="input-container">
-            <InputLabel
-              id="acceptTerms"
-              label="I Accept the Terms & Conditions"
-            />
+          {
+          <span>
+              I Accept the{' '}
+              <a href="/Terms" target="_blank" rel="noopener noreferrer" style ={{color :"blue", fontWeight: "bold" }} >
+              Terms & Conditions
+              </a>
+          </span>
+      }
             
             <br />
             <input
@@ -905,7 +929,8 @@ const PlanForm = ({ plan }: Props) => {
       <OrderSummary plan={plan} />
       <br />
       <br />
-      <div className="upload">
+      <div className=" uploadFile">
+        
         <h1
           style={{
             paddingLeft: "-37px",
@@ -931,6 +956,7 @@ const PlanForm = ({ plan }: Props) => {
           style={{marginRight:"1%"}}
         />
         <InputLabel id="checkbox3" label="CREDIT CARD/DEBIT CARD"  />
+
         <br />
         <input
           type="checkbox"
@@ -944,7 +970,7 @@ const PlanForm = ({ plan }: Props) => {
         <InputLabel id="checkbox4" label="CASH/SCODE" />
 
         <br />
-        <CashPayments />
+        {/* <CashPayments /> */}
       </div>
       <br />
       <button
