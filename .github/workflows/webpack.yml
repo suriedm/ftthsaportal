@@ -8,26 +8,33 @@ on:
 
 jobs:
   build:
+    name: GIT Test Build 
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
 
-    - name: Install dependencies
-      run: npm install
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+      
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build # will run `yarn build:prod` command
 
-    - name: Lint
-      run: npm --target=lint --all --parallel=3
-
-    - name: Build
-      run: npm build
+      - name: Lint
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint # will run `yarn test` command
+      
+      - name: Test the app
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: test # will run `yarn test` command
 
