@@ -124,7 +124,7 @@ export interface Profile {
 
 const UserProfile: NextPage = () => {
   const { push } = useRouter();
-  const { userId, profile, setProfile } = authStore();
+  const { userId, profile, accessToken, setProfile } = authStore();
   const { subscriptions, deviceReference, subscriptionId, wifi_password, wifi_ssid, setSubscription, setWifiDetails } =
     subscriptionStore();
   const { transactions, setTransaction } = transactionStore();
@@ -163,7 +163,8 @@ const UserProfile: NextPage = () => {
     try {
       const response = await fetch(`https://stm-dev.intentio.co.za/api/portal/subscriptions/details/${subscriptionId}`, {
         headers: {
-          'accept': 'application/json'
+          'accept': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
         // body: JSON.stringify({portal_subscription_id:formData?.subscriptionId})
       });
@@ -214,7 +215,13 @@ const UserProfile: NextPage = () => {
     console.log(userId);
     const url = `https://stm-dev.intentio.co.za/api/portal/`;
     try {
-      const response = await fetch(`${url}subscriptions/customer/${userId}`);
+      const response = await fetch(`${url}subscriptions/customer/${userId}`,{
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        }
+      });
       if (response.ok) {
         const data: SubscriptionsResponse = await response.json();
         setSubscription(data.data);
@@ -229,7 +236,13 @@ const UserProfile: NextPage = () => {
       console.error("Error fetching subscriptions data:", error);
     }
     try {
-      const response = await fetch(`${url}user/${userId}`);
+      const response = await fetch(`${url}user/${userId}`,{
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        }
+      });
       if (response.ok) {
         const userData: ProfileResponse = await response.json();
         setProfile(userData.data);
@@ -261,6 +274,7 @@ const UserProfile: NextPage = () => {
           headers: {
             accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({ device_reference: device }),
         }
@@ -283,6 +297,7 @@ const UserProfile: NextPage = () => {
         headers: {
           accept: "application/json",
           "content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({newpassword:formData.new_password})
       });
@@ -357,6 +372,7 @@ const UserProfile: NextPage = () => {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(formData)
       });

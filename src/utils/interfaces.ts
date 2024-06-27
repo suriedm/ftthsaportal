@@ -53,4 +53,12 @@ export interface RegistrationErrorResponse {
 }
 
 export type plans = "10" | "20" | "30" | "50" | "100";
-export type activationFee = "999" | "399" ;
+export type activationFee = "999" | "399";
+export type authorizationType = "bearer";
+
+export interface Authorization {
+    access_token : string,
+    portal_end_customer_id : number
+    success : boolean,
+    token_type :authorizationType
+}

@@ -11,6 +11,7 @@ import { transactionStore } from "../stores/Transaction";
 import { subscriptionStore } from "../stores/Subscription";
 import useMouseLeave from "use-mouse-leave";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Authorization } from '../utils/interfaces';
 
 interface Props {
   id: number;
@@ -25,7 +26,7 @@ export const Header = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [loginPopUp, forgotPopUp] = useState(false);
   const { setSubscription, setProductId } = subscriptionStore();
-  const { userId, profile, setUserId, setProfile } = authStore();
+  const { userId, profile, accessToken, setUserAuthorization, setProfile } = authStore();
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [showOTPSection, setShowOTPSection] = useState(false);
   const [showNewPasswordSection, setShowNewPasswordSection] = useState(false);
@@ -155,6 +156,7 @@ export const Header = () => {
         headers: {
           "Content-Type": "application/json",
           accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(data),
       });
@@ -173,9 +175,6 @@ export const Header = () => {
     }
   }
 
-  useEffect(() => {
-    console.log("📢 [Header.tsx:37] menuOpen ", menuOpen);
-  }, [menuOpen]);
 
   const handleMouseEnter = () => {
     setMenuOpen(true);
@@ -243,12 +242,12 @@ export const Header = () => {
       }
     );
     if (response.ok) {
-      const data = await response.json();
+      const data: Authorization = await response.json();
       setShowModal(false); // Hide the login popup
       // localStorage.setItem("accessToken", data.access_token);
       // localStorage.setItem("deviceReference",data.devicereference);
       // setDeviceReference(data.device_reference);
-      setUserId(data.portal_end_customer_id);
+      setUserAuthorization(data);
       alert("Successfully logged in as: " + formData.username);
       setIsLoggedIn(true);
       router.push("./profile?username=" + formData.username);
@@ -259,7 +258,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     setProfile(null);
-    setUserId(null);
+    setUserAuthorization(null);
     setProductId(null);
     setTransaction([]);
     setSubscription([]);
